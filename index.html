@@ -44,6 +44,21 @@
                 </div>
                 
                 <div class="sidebar-section">
+                    <h3>Filter by Features</h3>
+                    <div class="tag-filters" id="tag-filters">
+                        <button class="tag-filter-btn" data-tag="self-hosted">Self-Hosted</button>
+                        <button class="tag-filter-btn" data-tag="encrypted">Encrypted</button>
+                        <button class="tag-filter-btn" data-tag="p2p">P2P</button>
+                        <button class="tag-filter-btn" data-tag="open-source">Open Source</button>
+                        <button class="tag-filter-btn" data-tag="anonymous">Anonymous</button>
+                        <button class="tag-filter-btn" data-tag="mobile">Mobile</button>
+                        <button class="tag-filter-btn" data-tag="desktop">Desktop</button>
+                        <button class="tag-filter-btn" data-tag="free-tier">Free Tier</button>
+                    </div>
+                    <button id="clear-tags" style="margin-top: 10px; font-size: 12px;">Clear Filters</button>
+                </div>
+
+                <div class="sidebar-section">
                     <h3>Quick Stats</h3>
                     <div class="stats">
                         <div class="stat-item">
@@ -58,18 +73,6 @@
                             <span class="stat-number" id="decentralized-count">--</span>
                             <span class="stat-label">Decentralized</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Featured</h3>
-                    <div class="featured-tool">
-                        <strong>Signal</strong>
-                        <p>Private messenger with end-to-end encryption</p>
-                    </div>
-                    <div class="featured-tool">
-                        <strong>Firefox</strong>
-                        <p>Privacy-focused open source browser</p>
                     </div>
                 </div>
             </div>
@@ -87,12 +90,12 @@
                             <option value="name-desc">Name (Z-A)</option>
                             <option value="category">Category</option>
                             <option value="privacy">Privacy Level</option>
+                            <option value="newest">Newest First</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="tools-list" id="tools-container">
-                    <!-- Tools will be loaded here by JavaScript -->
                     <div class="loading">Loading tools...</div>
                 </div>
 
@@ -127,6 +130,13 @@
             </div>
 
             <div class="right-sidebar">
+                <div class="sidebar-section">
+                    <h3>Recently Added</h3>
+                    <div id="recent-tools">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+
                 <div class="sidebar-section">
                     <h3>Privacy Tips</h3>
                     <ul class="tips-list">
@@ -193,4 +203,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>w
+</html>
