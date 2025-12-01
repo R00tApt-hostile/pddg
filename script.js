@@ -1,622 +1,456 @@
-// Add to top of script.js (with other variables)
-let currentPage = 1;
-const itemsPerPage = 20; // Show 20 tools per page
+document.addEventListener('DOMContentLoaded', function() {
+    // Global variables
+    let allApps = [];
+    let filteredApps = [];
+    let currentPage = 1;
+    const appsPerPage = 20;
+    let currentFilters = {
+        categories: [],
+        tags: [],
+        search: ''
+    };
+    let sortBy = 'name';
 
-// Update getFilteredTools function to handle pagination
-function getFilteredTools() {
-    let filtered = [...tools];
-    
-    // Filter by category
-    if (currentCategory !== 'all') {
-        filtered = filtered.filter(tool => tool.category === currentCategory);
+    // Initialize the app
+    async function init() {
+        await loadApps();
+        renderApps();
+        setupEventListeners();
+        updateStats();
     }
-    
-    // Filter by search term
-    if (currentSearch) {
-        filtered = filtered.filter(tool => 
-            tool.name.toLowerCase().includes(currentSearch) ||
-            tool.description.toLowerCase().includes(currentSearch) ||
-            tool.category.toLowerCase().includes(currentSearch) ||
-            (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(currentSearch)))
-        );
-    }
-    
-    // Filter by active tags
-    if (activeTags.size > 0) {
-        filtered = filtered.filter(tool => {
-            if (!tool.tags) return false;
-            for (const tag of activeTags) {
-                if (!tool.tags.includes(tag)) {
-                    return false;
+
+    // Load apps from data.json
+    async function loadApps() {
+        try {
+            const response = await fetch('data.json');
+            allApps = await response.json();
+            
+            // Load ratings from localStorage
+            allApps.forEach(app => {
+                const savedRating = localStorage.getItem(`app-rating-${app.id}`);
+                if (savedRating) {
+                    app.userRating = parseInt(savedRating);
                 }
+                
+                // Calculate average rating
+                if (app.ratings && app.ratings.length > 0) {
+                    const sum = app.ratings.reduce((a, b) => a + b, 0);
+                    app.averageRating = (sum / app.ratings.length).toFixed(1);
+                } else {
+                    app.averageRating = '0.0';
+                }
+            });
+            
+            filteredApps = [...allApps];
+        } catch (error) {
+            console.error('Error loading apps:', error);
+            // Fallback to sample data if data.json fails
+            loadSampleData();
+        }
+    }
+
+    // Fallback sample data
+    function loadSampleData() {
+        // This would be replaced by actual 111+ apps in data.json
+        allApps = [
+            {
+                id: 1,
+                name: "Signal",
+                url: "https://signal.org",
+                description: "Private messenger with end-to-end encryption",
+                categories: ["Messaging", "Communication"],
+                tags: ["encrypted", "privacy", "open-source"],
+                ratings: [5, 4, 5]
+            },
+            // ... more apps
+        ];
+        filteredApps = [...allApps];
+    }
+
+    // Render apps to the page
+    function renderApps() {
+        const container = document.getElementById('apps-container');
+        const startIndex = (currentPage - 1) * appsPerPage;
+        const endIndex = startIndex + appsPerPage;
+        const appsToShow = filteredApps.slice(startIndex, endIndex);
+        
+        container.innerHTML = '';
+        
+        appsToShow.forEach(app => {
+            const appElement = createAppElement(app);
+            container.appendChild(appElement);
+        });
+        
+        updatePagination();
+        updatePageInfo();
+    }
+
+    // Create app card element
+    function createAppElement(app) {
+        const div = document.createElement('div');
+        div.className = 'app-card';
+        
+        // Calculate star display
+        const averageRating = parseFloat(app.averageRating);
+        const userRating = app.userRating || 0;
+        const starsHTML = createStarsHTML(averageRating, userRating, app.id);
+        
+        div.innerHTML = `
+            <div class="app-header">
+                <a href="${app.url}" target="_blank" class="app-name">
+                    ${app.name}
+                </a>
+                <div class="app-rating-display">
+                    <span class="rating-number">${app.averageRating}</span>
+                    <i class="fas fa-star" style="color: #ffd700;"></i>
+                </div>
+            </div>
+            
+            <p class="app-description">${app.description || 'No description available'}</p>
+            
+            <div class="app-categories">
+                ${app.categories.map(cat => 
+                    `<span class="category" data-category="${cat}">${cat}</span>`
+                ).join('')}
+            </div>
+            
+            <div class="app-tags">
+                ${app.tags.map(tag => 
+                    `<span class="app-tag" data-tag="${tag}">#${tag}</span>`
+                ).join('')}
+            </div>
+            
+            <div class="rating">
+                <div class="stars" data-app-id="${app.id}">
+                    ${starsHTML}
+                </div>
+                <div class="rating-info">
+                    ${app.ratings ? `${app.ratings.length} ratings` : 'No ratings yet'}
+                </div>
+            </div>
+        `;
+        
+        // Add star rating event listeners
+        const starsContainer = div.querySelector('.stars');
+        starsContainer.addEventListener('click', handleStarClick);
+        
+        // Add filter event listeners to tags and categories
+        div.querySelectorAll('.category').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleCategoryFilter(el.dataset.category);
+            });
+        });
+        
+        div.querySelectorAll('.app-tag').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleTagFilter(el.dataset.tag);
+            });
+        });
+        
+        return div;
+    }
+
+    // Create stars HTML for rating
+    function createStarsHTML(averageRating, userRating, appId) {
+        let html = '';
+        for (let i = 1; i <= 5; i++) {
+            const isUserRating = userRating >= i;
+            const isAverageRating = averageRating >= i;
+            const isActive = isUserRating || (!userRating && isAverageRating);
+            
+            html += `
+                <span class="star ${isActive ? 'active' : ''}" 
+                      data-rating="${i}" 
+                      data-app-id="${appId}">
+                    ★
+                </span>
+            `;
+        }
+        return html;
+    }
+
+    // Handle star rating click
+    function handleStarClick(e) {
+        const star = e.target;
+        if (!star.classList.contains('star')) return;
+        
+        const appId = parseInt(star.dataset.appId);
+        const rating = parseInt(star.dataset.rating);
+        
+        // Save rating to localStorage
+        localStorage.setItem(`app-rating-${appId}`, rating.toString());
+        
+        // Update the app data
+        const app = allApps.find(a => a.id === appId);
+        if (app) {
+            app.userRating = rating;
+            if (!app.ratings) app.ratings = [];
+            app.ratings.push(rating);
+            
+            // Recalculate average
+            const sum = app.ratings.reduce((a, b) => a + b, 0);
+            app.averageRating = (sum / app.ratings.length).toFixed(1);
+            
+            // Update display
+            renderApps();
+            updateStats();
+        }
+    }
+
+    // Update pagination controls
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredApps.length / appsPerPage);
+        const pageNumbers = document.getElementById('page-numbers');
+        const prevBtn = document.getElementById('prev-page');
+        const nextBtn = document.getElementById('next-page');
+        
+        // Update button states
+        prevBtn.disabled = currentPage === 1;
+        nextBtn.disabled = currentPage === totalPages || totalPages === 0;
+        
+        // Generate page numbers
+        pageNumbers.innerHTML = '';
+        
+        // Show first page, last page, and pages around current
+        const pagesToShow = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
+        } else {
+            pagesToShow.push(1);
+            if (currentPage > 3) pagesToShow.push('...');
+            
+            const start = Math.max(2, currentPage - 1);
+            const end = Math.min(totalPages - 1, currentPage + 1);
+            
+            for (let i = start; i <= end; i++) pagesToShow.push(i);
+            
+            if (currentPage < totalPages - 2) pagesToShow.push('...');
+            pagesToShow.push(totalPages);
+        }
+        
+        // Create page number buttons
+        pagesToShow.forEach(page => {
+            const btn = document.createElement('button');
+            btn.className = 'page-number';
+            
+            if (page === '...') {
+                btn.textContent = '...';
+                btn.disabled = true;
+            } else {
+                btn.textContent = page;
+                if (page === currentPage) {
+                    btn.classList.add('active');
+                }
+                btn.addEventListener('click', () => {
+                    currentPage = page;
+                    renderApps();
+                });
             }
+            
+            pageNumbers.appendChild(btn);
+        });
+    }
+
+    // Update page info
+    function updatePageInfo() {
+        const startIndex = (currentPage - 1) * appsPerPage + 1;
+        const endIndex = Math.min(startIndex + appsPerPage - 1, filteredApps.length);
+        const totalCount = filteredApps.length;
+        
+        document.getElementById('start-index').textContent = startIndex;
+        document.getElementById('end-index').textContent = endIndex;
+        document.getElementById('total-count').textContent = totalCount;
+        document.getElementById('total-apps').textContent = allApps.length;
+    }
+
+    // Update statistics
+    function updateStats() {
+        // Count unique tags
+        const allTags = new Set();
+        allApps.forEach(app => {
+            app.tags.forEach(tag => allTags.add(tag));
+        });
+        document.getElementById('total-tags').textContent = allTags.size;
+    }
+
+    // Filter apps based on current filters
+    function filterApps() {
+        filteredApps = allApps.filter(app => {
+            // Search filter
+            if (currentFilters.search) {
+                const searchTerm = currentFilters.search.toLowerCase();
+                const searchable = `${app.name} ${app.description} ${app.categories.join(' ')} ${app.tags.join(' ')}`.toLowerCase();
+                if (!searchable.includes(searchTerm)) return false;
+            }
+            
+            // Category filter
+            if (currentFilters.categories.length > 0) {
+                const hasCategory = currentFilters.categories.some(cat => 
+                    app.categories.includes(cat)
+                );
+                if (!hasCategory) return false;
+            }
+            
+            // Tag filter
+            if (currentFilters.tags.length > 0) {
+                const hasTag = currentFilters.tags.some(tag => 
+                    app.tags.includes(tag)
+                );
+                if (!hasTag) return false;
+            }
+            
             return true;
         });
-    }
-    
-    // Sort tools
-    filtered.sort((a, b) => {
-        switch(currentSort) {
-            case 'name':
-                return a.name.localeCompare(b.name);
-            case 'name-desc':
-                return b.name.localeCompare(a.name);
-            case 'category':
-                return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
-            case 'privacy':
-                const privacyOrder = { high: 3, medium: 2, low: 1 };
-                return privacyOrder[b.privacyLevel] - privacyOrder[a.privacyLevel] || a.name.localeCompare(b.name);
-            case 'newest':
-                return b.id - a.id;
-            default:
-                return a.name.localeCompare(b.name);
-        }
-    });
-    
-    return filtered;
-}
-
-// Update renderTools function to include pagination
-function renderTools() {
-    const filteredTools = getFilteredTools();
-    const totalPages = Math.ceil(filteredTools.length / itemsPerPage);
-    
-    // Reset to page 1 if current page is invalid
-    if (currentPage > totalPages && totalPages > 0) {
+        
+        // Sort filtered apps
+        sortFilteredApps();
+        
+        // Reset to first page
         currentPage = 1;
+        renderApps();
+        updateFilterTags();
     }
-    
-    // Get tools for current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const toolsToDisplay = filteredTools.slice(startIndex, endIndex);
-    
-    // Show no results message
-    if (filteredTools.length === 0) {
-        toolsContainer.innerHTML = `
-            <div class="no-results">
-                <p>No tools found matching your criteria.</p>
-                <p>Try a different search term, category, or clear tag filters.</p>
-            </div>
-        `;
-        // Hide pagination
-        document.getElementById('pagination').style.display = 'none';
-        return;
-    }
-    
-    // Render tools
-    toolsContainer.innerHTML = toolsToDisplay.map(tool => `
-        <div class="tool-item">
-            <div class="tool-header">
-                <a href="${tool.url}" target="_blank" class="tool-title">${tool.name}</a>
-                <span class="tool-category">${getCategoryLabel(tool.category)}</span>
-            </div>
-            <p class="tool-description">${tool.description}</p>
-            <div class="tool-meta">
-                ${tool.openSource ? '<span class="meta-item"><span class="meta-icon open-source">✓</span> Open Source</span>' : ''}
-                ${tool.decentralized ? '<span class="meta-item"><span class="meta-icon decentralized">⚡</span> Decentralized</span>' : ''}
-                <span class="meta-item">
-                    <span class="meta-icon privacy-${tool.privacyLevel}">🛡️</span>
-                    Privacy: ${getPrivacyLabel(tool.privacyLevel)}
-                </span>
-            </div>
-            ${tool.tags && tool.tags.length > 0 ? `
-                <div class="tool-tags">
-                    ${tool.tags.map(tag => `<span class="tool-tag">${tag}</span>`).join('')}
-                </div>
-            ` : ''}
-        </div>
-    `).join('');
-    
-    // Update pagination
-    updatePagination(filteredTools.length, totalPages);
-}
 
-// Add pagination controls
-function updatePagination(totalItems, totalPages) {
-    const paginationContainer = document.getElementById('pagination');
-    if (!paginationContainer) {
-        // Create pagination if it doesn't exist
-        const paginationHTML = `
-            <div class="pagination" id="pagination">
-                <button id="prev-page" disabled>Previous</button>
-                <span class="pagination-info" id="page-info">Page 1 of ${totalPages}</span>
-                <button id="next-page">Next</button>
-            </div>
-        `;
-        toolsContainer.insertAdjacentHTML('afterend', paginationHTML);
-    } else {
-        paginationContainer.innerHTML = `
-            <button id="prev-page" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>
-            <span class="pagination-info" id="page-info">Page ${currentPage} of ${totalPages} (${totalItems} tools)</span>
-            <button id="next-page" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>
-        `;
-        paginationContainer.style.display = 'flex';
-    }
-    
-    // Add event listeners
-    document.getElementById('prev-page')?.addEventListener('click', () => {
-        if (currentPage > 1) {
-            currentPage--;
-            renderTools();
-            window.scrollTo({ top: toolsContainer.offsetTop - 100, behavior: 'smooth' });
-        }
-    });
-    
-    document.getElementById('next-page')?.addEventListener('click', () => {
-        const totalPages = Math.ceil(getFilteredTools().length / itemsPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderTools();
-            window.scrollTo({ top: toolsContainer.offsetTop - 100, behavior: 'smooth' });
-        }
-    });
-}
-
-// Update setupEventListeners to reset page on filters
-function setupEventListeners() {
-    // ... existing code ...
-    
-    // Add reset page on filter changes
-    const resetPage = () => {
-        currentPage = 1;
-        renderTools();
-    };
-    
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            currentCategory = this.dataset.category;
-            resetPage();
-        });
-    });
-    
-    searchBtn.addEventListener('click', () => {
-        currentSearch = searchInput.value.toLowerCase().trim();
-        resetPage();
-    });
-    
-    sortSelect.addEventListener('change', function() {
-        currentSort = this.value;
-        resetPage();
-    });
-    
-    document.querySelectorAll('.tag-filter-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const tag = this.dataset.tag;
-            if (activeTags.has(tag)) {
-                activeTags.delete(tag);
-                this.classList.remove('active');
-            } else {
-                activeTags.add(tag);
-                this.classList.add('active');
+    // Sort filtered apps
+    function sortFilteredApps() {
+        filteredApps.sort((a, b) => {
+            switch (sortBy) {
+                case 'rating':
+                    return parseFloat(b.averageRating) - parseFloat(a.averageRating);
+                case 'newest':
+                    return b.id - a.id; // Assuming higher ID = newer
+                default: // 'name'
+                    return a.name.localeCompare(b.name);
             }
-            resetPage();
         });
-    });
-    
-    document.getElementById('clear-tags')?.addEventListener('click', function() {
-        activeTags.clear();
-        document.querySelectorAll('.tag-filter-btn').forEach(btn => {
-            btn.classList.remove('active');
+    }
+
+    // Update filter tags display
+    function updateFilterTags() {
+        const categoryContainer = document.getElementById('category-filters');
+        const tagContainer = document.getElementById('tag-filters');
+        
+        // Get all unique categories and tags
+        const categories = [...new Set(allApps.flatMap(app => app.categories))];
+        const allTags = allApps.flatMap(app => app.tags);
+        const tagCounts = {};
+        allTags.forEach(tag => {
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
         });
-        resetPage();
-    });
-}
-
-// Update loadToolsFromJSON to include initial pagination
-async function loadToolsFromJSON() {
-    try {
-        const response = await fetch('data/apps.json');
-        const data = await response.json();
-        tools = data.tools;
-        console.log(`Loaded ${tools.length} tools from JSON`);
-        renderTools();
-        updateStats();
-        showRecentTools();
-    } catch (error) {
-        console.error('Failed to load tools from JSON:', error);
-        console.log('Using fallback tools');
-        tools = defaultTools;
-        renderTools();
-        updateStats();
-        showRecentTools();
+        
+        // Sort tags by frequency
+        const popularTags = Object.entries(tagCounts)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 15)
+            .map(([tag]) => tag);
+        
+        // Render category filters
+        categoryContainer.innerHTML = categories.map(cat => `
+            <span class="tag ${currentFilters.categories.includes(cat) ? 'active' : ''}" 
+                  data-filter="category" 
+                  data-value="${cat}">
+                ${cat}
+            </span>
+        `).join('');
+        
+        // Render tag filters
+        tagContainer.innerHTML = popularTags.map(tag => `
+            <span class="tag ${currentFilters.tags.includes(tag) ? 'active' : ''}" 
+                  data-filter="tag" 
+                  data-value="${tag}">
+                ${tag} (${tagCounts[tag]})
+            </span>
+        `).join('');
+        
+        // Add event listeners to filter tags
+        document.querySelectorAll('.tag[data-filter]').forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filterType = tag.dataset.filter;
+                const value = tag.dataset.value;
+                
+                if (filterType === 'category') {
+                    toggleCategoryFilter(value);
+                } else if (filterType === 'tag') {
+                    toggleTagFilter(value);
+                }
+            });
+        });
     }
-}
-// Tool data - can be moved to separate JSON file
-const tools = [
-    {
-        id: 1,
-        name: "Signal",
-        url: "https://signal.org",
-        description: "Private messaging app with end-to-end encryption. Open source and nonprofit.",
-        category: "messaging",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 2,
-        name: "Element",
-        url: "https://element.io",
-        description: "Secure collaboration and messaging app powered by Matrix protocol.",
-        category: "messaging",
-        openSource: true,
-        decentralized: true,
-        privacyLevel: "high"
-    },
-    {
-        id: 3,
-        name: "Firefox",
-        url: "https://www.mozilla.org/firefox/",
-        description: "Privacy-focused web browser from Mozilla. Open source with strong tracking protection.",
-        category: "browser",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 4,
-        name: "Brave",
-        url: "https://brave.com",
-        description: "Privacy browser that blocks ads and trackers by default.",
-        category: "browser",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 5,
-        name: "DuckDuckGo",
-        url: "https://duckduckgo.com",
-        description: "Privacy-focused search engine that doesn't track your searches.",
-        category: "search",
-        openSource: false,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 6,
-        name: "Startpage",
-        url: "https://www.startpage.com",
-        description: "Private search engine that shows Google results without tracking.",
-        category: "search",
-        openSource: false,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 7,
-        name: "ProtonMail",
-        url: "https://protonmail.com",
-        description: "Secure email service with end-to-end encryption based in Switzerland.",
-        category: "email",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 8,
-        name: "Tutanota",
-        url: "https://tutanota.com",
-        description: "Encrypted email service that's open source and ad-free.",
-        category: "email",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 9,
-        name: "Nextcloud",
-        url: "https://nextcloud.com",
-        description: "Self-hosted productivity platform with file sync, calendar, contacts, and more.",
-        category: "storage",
-        openSource: true,
-        decentralized: true,
-        privacyLevel: "high"
-    },
-    {
-        id: 10,
-        name: "Proton Drive",
-        url: "https://proton.me/drive",
-        description: "End-to-end encrypted cloud storage from Proton.",
-        category: "storage",
-        openSource: false,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 11,
-        name: "Mullvad VPN",
-        url: "https://mullvad.net",
-        description: "VPN service focused on privacy with anonymous accounts.",
-        category: "vpn",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 12,
-        name: "IVPN",
-        url: "https://ivpn.net",
-        description: "Privacy-first VPN service with strong no-logs policy.",
-        category: "vpn",
-        openSource: false,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 13,
-        name: "Mastodon",
-        url: "https://joinmastodon.org",
-        description: "Decentralized social network running on the Fediverse.",
-        category: "social",
-        openSource: true,
-        decentralized: true,
-        privacyLevel: "high"
-    },
-    {
-        id: 14,
-        name: "Pixelfed",
-        url: "https://pixelfed.org",
-        description: "Decentralized image sharing platform (like Instagram).",
-        category: "social",
-        openSource: true,
-        decentralized: true,
-        privacyLevel: "high"
-    },
-    {
-        id: 15,
-        name: "/e/ OS",
-        url: "https://e.foundation",
-        description: "Privacy-focused mobile OS based on Android, de-Googled.",
-        category: "os",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 16,
-        name: "LineageOS",
-        url: "https://lineageos.org",
-        description: "Open source Android distribution for phones and tablets.",
-        category: "os",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "medium"
-    },
-    {
-        id: 17,
-        name: "Standard Notes",
-        url: "https://standardnotes.com",
-        description: "End-to-end encrypted note-taking app with extensions.",
-        category: "productivity",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 18,
-        name: "Jitsi",
-        url: "https://jitsi.org",
-        description: "Secure, open source video conferencing platform.",
-        category: "productivity",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 19,
-        name: "Bitwarden",
-        url: "https://bitwarden.com",
-        description: "Open source password manager with end-to-end encryption.",
-        category: "productivity",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
-    },
-    {
-        id: 20,
-        name: "LibreOffice",
-        url: "https://www.libreoffice.org",
-        description: "Free and open source office suite, alternative to Microsoft Office.",
-        category: "productivity",
-        openSource: true,
-        decentralized: false,
-        privacyLevel: "high"
+
+    // Toggle category filter
+    function toggleCategoryFilter(category) {
+        const index = currentFilters.categories.indexOf(category);
+        if (index === -1) {
+            currentFilters.categories.push(category);
+        } else {
+            currentFilters.categories.splice(index, 1);
+        }
+        filterApps();
     }
-];
 
-// DOM elements
-const toolsContainer = document.getElementById('tools-container');
-const categoryButtons = document.querySelectorAll('.category-btn');
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.getElementById('search-btn');
-const sortSelect = document.getElementById('sort-select');
-const statsElements = {
-    total: document.getElementById('total-tools'),
-    openSource: document.getElementById('open-source-count'),
-    decentralized: document.getElementById('decentralized-count')
-};
+    // Toggle tag filter
+    function toggleTagFilter(tag) {
+        const index = currentFilters.tags.indexOf(tag);
+        if (index === -1) {
+            currentFilters.tags.push(tag);
+        } else {
+            currentFilters.tags.splice(index, 1);
+        }
+        filterApps();
+    }
 
-// Current state
-let currentCategory = 'all';
-let currentSearch = '';
-let currentSort = 'name';
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    // Set current date
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
-    
-    // Display tools
-    renderTools();
-    
     // Setup event listeners
-    setupEventListeners();
-    
-    // Update stats
-    updateStats();
-});
-
-// Setup event listeners
-function setupEventListeners() {
-    // Category filter buttons
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Update active button
-            categoryButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Update category and re-render
-            currentCategory = this.dataset.category;
-            renderTools();
+    function setupEventListeners() {
+        // Search input
+        const searchInput = document.getElementById('search');
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentFilters.search = e.target.value.trim();
+                filterApps();
+            }, 300);
         });
-    });
-    
-    // Search
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keyup', function(event) {
-        if (event.key === 'Enter') {
-            performSearch();
-        }
-    });
-    
-    // Sort
-    sortSelect.addEventListener('change', function() {
-        currentSort = this.value;
-        renderTools();
-    });
-}
-
-// Perform search
-function performSearch() {
-    currentSearch = searchInput.value.toLowerCase().trim();
-    renderTools();
-}
-
-// Filter tools based on current state
-function getFilteredTools() {
-    let filtered = [...tools];
-    
-    // Filter by category
-    if (currentCategory !== 'all') {
-        filtered = filtered.filter(tool => tool.category === currentCategory);
+        
+        // Sort select
+        const sortSelect = document.getElementById('sort-by');
+        sortSelect.addEventListener('change', (e) => {
+            sortBy = e.target.value;
+            sortFilteredApps();
+            renderApps();
+        });
+        
+        // Clear filters button
+        document.getElementById('clear-filters').addEventListener('click', () => {
+            currentFilters = {
+                categories: [],
+                tags: [],
+                search: ''
+            };
+            searchInput.value = '';
+            filterApps();
+        });
+        
+        // Previous page button
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderApps();
+            }
+        });
+        
+        // Next page button
+        document.getElementById('next-page').addEventListener('click', () => {
+            const totalPages = Math.ceil(filteredApps.length / appsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderApps();
+            }
+        });
     }
-    
-    // Filter by search term
-    if (currentSearch) {
-        filtered = filtered.filter(tool => 
-            tool.name.toLowerCase().includes(currentSearch) ||
-            tool.description.toLowerCase().includes(currentSearch) ||
-            tool.category.toLowerCase().includes(currentSearch)
-        );
-    }
-    
-    // Sort tools
-    filtered.sort((a, b) => {
-        switch(currentSort) {
-            case 'name':
-                return a.name.localeCompare(b.name);
-            case 'name-desc':
-                return b.name.localeCompare(a.name);
-            case 'category':
-                return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
-            case 'privacy':
-                const privacyOrder = { high: 3, medium: 2, low: 1 };
-                return privacyOrder[b.privacyLevel] - privacyOrder[a.privacyLevel] || a.name.localeCompare(b.name);
-            default:
-                return a.name.localeCompare(b.name);
-        }
-    });
-    
-    return filtered;
-}
 
-// Render tools to the page
-function renderTools() {
-    const filteredTools = getFilteredTools();
-    
-    if (filteredTools.length === 0) {
-        toolsContainer.innerHTML = `
-            <div class="no-results">
-                <p>No tools found matching your criteria.</p>
-                <p>Try a different search term or category.</p>
-            </div>
-        `;
-        return;
-    }
-    
-    toolsContainer.innerHTML = filteredTools.map(tool => `
-        <div class="tool-item">
-            <div class="tool-header">
-                <a href="${tool.url}" target="_blank" class="tool-title">${tool.name}</a>
-                <span class="tool-category">${getCategoryLabel(tool.category)}</span>
-            </div>
-            <p class="tool-description">${tool.description}</p>
-            <div class="tool-meta">
-                ${tool.openSource ? '<span class="meta-item"><span class="meta-icon open-source">✓</span> Open Source</span>' : ''}
-                ${tool.decentralized ? '<span class="meta-item"><span class="meta-icon decentralized">⚡</span> Decentralized</span>' : ''}
-                <span class="meta-item">
-                    <span class="meta-icon privacy-${tool.privacyLevel}">🛡️</span>
-                    Privacy: ${tool.privacyLevel === 'high' ? 'High' : tool.privacyLevel === 'medium' ? 'Medium' : 'Low'}
-                </span>
-            </div>
-        </div>
-    `).join('');
-}
-
-// Get human-readable category label
-function getCategoryLabel(category) {
-    const labels = {
-        messaging: 'Messaging',
-        browser: 'Browser',
-        search: 'Search Engine',
-        storage: 'Cloud Storage',
-        os: 'Operating System',
-        social: 'Social Media',
-        productivity: 'Productivity',
-        vpn: 'VPN',
-        email: 'Email'
-    };
-    return labels[category] || category;
-}
-
-// Update statistics
-function updateStats() {
-    const total = tools.length;
-    const openSourceCount = tools.filter(tool => tool.openSource).length;
-    const decentralizedCount = tools.filter(tool => tool.decentralized).length;
-    
-    statsElements.total.textContent = total;
-    statsElements.openSource.textContent = openSourceCount;
-    statsElements.decentralized.textContent = decentralizedCount;
-}
-
-// Add some CSS for no-results
-const style = document.createElement('style');
-style.textContent = `
-    .no-results {
-        text-align: center;
-        padding: 60px 20px;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-    }
-    
-    .no-results p {
-        margin-bottom: 10px;
-        color: #666;
-    }
-    
-    .no-results p:first-child {
-        font-size: 16px;
-        color: #333;
-    }
-`;
-document.head.appendChild(style);
+    // Initialize the application
+    init();
+});
