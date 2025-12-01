@@ -3,108 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decentralized Apps Directory - Privacy-Focused FOSS</title>
+    <title>Privacy Tools Directory - De-Googled Apps</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <div class="header-top">
-                <h1><i class="fas fa-shield-alt"></i> Decentralized Apps Directory</h1>
-                <p class="subtitle">Open Source • Privacy-Focused • De-Googled • FOSS</p>
+                <h1><i class="fas fa-shield-alt"></i> Privacy Tools Directory</h1>
+                <p class="subtitle">A curated list of de-googled apps and tools with strong privacy focus (minimum privacy score: 55/100)</p>
             </div>
-            <div class="stats">
-                <span><i class="fas fa-box"></i> <span id="total-apps">111</span> Apps</span>
-                <span><i class="fas fa-tags"></i> <span id="total-tags">0</span> Tags</span>
-                <span><i class="fas fa-star"></i> Community Rated</span>
+            <div class="header-stats">
+                <span><i class="fas fa-lock"></i> <strong id="total-tools">0</strong> Tools</span>
+                <span><i class="fas fa-tags"></i> <strong id="total-categories">0</strong> Categories</span>
+                <span><i class="fas fa-star"></i> <strong id="average-rating">0.0</strong> Avg Rating</span>
             </div>
         </header>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Sidebar with Filters -->
+        <div class="content">
             <aside class="sidebar">
-                <div class="filter-section">
-                    <h3><i class="fas fa-filter"></i> Filters</h3>
-                    
-                    <div class="search-box">
-                        <input type="text" id="search" placeholder="Search apps...">
-                        <i class="fas fa-search"></i>
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-filter"></i> Filter by Category</h3>
+                    <div class="category-list" id="category-list">
+                        <!-- Categories will be loaded by JS -->
                     </div>
-
-                    <div class="filter-group">
-                        <h4><i class="fas fa-tags"></i> Categories</h4>
-                        <div id="category-filters" class="filter-tags"></div>
-                    </div>
-
-                    <div class="filter-group">
-                        <h4><i class="fas fa-hashtag"></i> Popular Tags</h4>
-                        <div id="tag-filters" class="filter-tags"></div>
-                    </div>
-
-                    <button id="clear-filters" class="clear-btn">
-                        <i class="fas fa-times"></i> Clear All Filters
-                    </button>
                 </div>
-
-                <div class="info-box">
-                    <h4><i class="fas fa-info-circle"></i> About</h4>
-                    <p>This directory lists decentralized, open-source, privacy-focused applications that respect your freedom.</p>
-                    <p>All apps are community-vetted and free from Google services.</p>
+                
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-tag"></i> Filter by Tag</h3>
+                    <div class="tag-list" id="tag-list">
+                        <!-- Tags will be loaded by JS -->
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-info-circle"></i> About</h3>
+                    <p>This directory lists privacy-focused alternatives to Google services and other tracking software.</p>
+                    <p>All tools have a minimum privacy score of 55/100 based on:</p>
+                    <ul>
+                        <li>Data collection policies</li>
+                        <li>Encryption standards</li>
+                        <li>Open-source status</li>
+                        <li>Independence from big tech</li>
+                    </ul>
+                    <p class="small-text">Ratings are stored locally in your browser.</p>
                 </div>
             </aside>
 
-            <!-- Main App Listing -->
-            <main class="app-listing">
+            <main class="main-content">
                 <div class="controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="search-input" placeholder="Search tools...">
+                    </div>
                     <div class="sort-controls">
-                        <select id="sort-by">
-                            <option value="name">Sort by: Name</option>
-                            <option value="rating">Sort by: Rating</option>
-                            <option value="newest">Sort by: Newest</option>
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select">
+                            <option value="name">Name (A-Z)</option>
+                            <option value="rating">Rating (High to Low)</option>
+                            <option value="privacy">Privacy Score (High to Low)</option>
                         </select>
                     </div>
-                    <div class="pagination-info">
-                        Showing <span id="start-index">1</span>-<span id="end-index">20</span> of <span id="total-count">111</span>
+                    <button id="reset-filters" class="btn"><i class="fas fa-redo"></i> Reset Filters</button>
+                </div>
+                
+                <div class="tools-container">
+                    <div class="tools-header">
+                        <h2 id="tools-title">All Privacy Tools</h2>
+                        <div class="pagination-info">
+                            <span id="page-info">Page 1 of 1</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tools-list" id="tools-list">
+                        <!-- Tools will be loaded by JS -->
+                    </div>
+                    
+                    <div class="pagination">
+                        <button id="prev-page" class="pagination-btn" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                        <div class="page-numbers" id="page-numbers">
+                            <!-- Page numbers will be generated by JS -->
+                        </div>
+                        <button id="next-page" class="pagination-btn">Next <i class="fas fa-chevron-right"></i></button>
                     </div>
                 </div>
-
-                <!-- Apps Container -->
-                <div id="apps-container" class="apps-container">
-                    <!-- Apps will be loaded here by JavaScript -->
-                </div>
-
-                <!-- Pagination -->
-                <div class="pagination">
-                    <button id="prev-page" class="page-btn">
-                        <i class="fas fa-arrow-left"></i> Previous
-                    </button>
-                    <div id="page-numbers" class="page-numbers">
-                        <!-- Page numbers will be generated here -->
-                    </div>
-                    <button id="next-page" class="page-btn">
-                        Next <i class="fas fa-arrow-right"></i>
-                    </button>
+                
+                <div class="add-tool-section">
+                    <h3><i class="fas fa-plus-circle"></i> Suggest a Tool</h3>
+                    <p>Know a privacy-focused tool that's not listed? <button id="show-form-btn" class="btn btn-small">Suggest it here</button></p>
+                    
+                    <form id="add-tool-form" class="hidden">
+                        <div class="form-row">
+                            <input type="text" id="tool-name" placeholder="Tool Name" required>
+                            <input type="url" id="tool-url" placeholder="Website URL" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="tool-category" placeholder="Category (e.g., Browser, Email)" required>
+                            <input type="number" id="tool-privacy" min="55" max="100" placeholder="Privacy Score (55-100)" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="text" id="tool-tags" placeholder="Tags (comma separated, e.g., open-source, encrypted)">
+                            <button type="submit" class="btn"><i class="fas fa-plus"></i> Add Tool</button>
+                        </div>
+                        <div class="form-row">
+                            <textarea id="tool-description" placeholder="Brief description..."></textarea>
+                        </div>
+                    </form>
+                    <div id="form-message" class="hidden"></div>
                 </div>
             </main>
         </div>
-
-        <!-- Footer -->
+        
         <footer class="footer">
-            <p>Decentralized Apps Directory • Open Source • 
-                <a href="https://github.com/yourusername/decentralized-apps-directory" target="_blank">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
+            <p>Privacy Tools Directory • Hosted on GitHub Pages • 
+                <a href="#" id="export-data"><i class="fas fa-download"></i> Export My Ratings</a> • 
+                <a href="#" id="import-data"><i class="fas fa-upload"></i> Import Ratings</a>
             </p>
-            <p class="disclaimer">
-                This directory is community-maintained. All applications are open-source and privacy-focused.
-            </p>
+            <p class="footer-note">This site uses localStorage to save your ratings. No data is sent to any server.</p>
         </footer>
     </div>
-
-    <!-- JavaScript -->
+    
+    <!-- Rating modal -->
+    <div id="rating-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Rate <span id="modal-tool-name"></span></h3>
+            <div class="rating-stars-large">
+                <i class="fas fa-star" data-rating="1"></i>
+                <i class="fas fa-star" data-rating="2"></i>
+                <i class="fas fa-star" data-rating="3"></i>
+                <i class="fas fa-star" data-rating="4"></i>
+                <i class="fas fa-star" data-rating="5"></i>
+            </div>
+            <p class="rating-text">Your rating: <span id="current-rating">Not rated yet</span></p>
+            <button id="save-rating" class="btn">Save Rating</button>
+        </div>
+    </div>
+    
+    <!-- Import modal -->
+    <div id="import-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Import Ratings</h3>
+            <p>Paste your exported ratings data:</p>
+            <textarea id="import-data-text" rows="5"></textarea>
+            <button id="process-import" class="btn">Import Ratings</button>
+            <p class="small-text">This will overwrite your current ratings.</p>
+        </div>
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
