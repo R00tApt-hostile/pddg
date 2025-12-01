@@ -3,194 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Directory of decentralized apps, privacy tools, and de-Googled alternatives">
-    <title>Decentralized & Privacy Tools Directory</title>
+    <title>Decentralized Apps Directory - Privacy-Focused FOSS</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/privacy.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <header>
+        <!-- Header -->
+        <header class="header">
             <div class="header-top">
-                <h1 class="logo">
-                    <span class="logo-icon">🌐</span>
-                    DECENTRALIZED DIRECTORY
-                </h1>
-                <div class="header-links">
-                    <a href="#browse" class="header-link">Browse</a>
-                    <a href="#submit" class="header-link">Submit</a>
-                    <a href="#about" class="header-link">About</a>
-                </div>
+                <h1><i class="fas fa-shield-alt"></i> Decentralized Apps Directory</h1>
+                <p class="subtitle">Open Source • Privacy-Focused • De-Googled • FOSS</p>
             </div>
-            <p class="tagline">A curated list of decentralized apps, open-source privacy tools, and de-Googled alternatives</p>
+            <div class="stats">
+                <span><i class="fas fa-box"></i> <span id="total-apps">111</span> Apps</span>
+                <span><i class="fas fa-tags"></i> <span id="total-tags">0</span> Tags</span>
+                <span><i class="fas fa-star"></i> Community Rated</span>
+            </div>
         </header>
 
+        <!-- Main Content -->
         <div class="main-content">
-            <div class="left-sidebar">
-                <div class="sidebar-section">
-                    <h3>Categories</h3>
-                    <ul class="category-list">
-                        <li><button class="category-btn active" data-category="all">All Tools</button></li>
-                        <li><button class="category-btn" data-category="messaging">Messaging</button></li>
-                        <li><button class="category-btn" data-category="browser">Browsers</button></li>
-                        <li><button class="category-btn" data-category="search">Search Engines</button></li>
-                        <li><button class="category-btn" data-category="storage">Cloud Storage</button></li>
-                        <li><button class="category-btn" data-category="os">Operating Systems</button></li>
-                        <li><button class="category-btn" data-category="social">Social Media</button></li>
-                        <li><button class="category-btn" data-category="productivity">Productivity</button></li>
-                        <li><button class="category-btn" data-category="vpn">VPNs</button></li>
-                        <li><button class="category-btn" data-category="email">Email</button></li>
-                    </ul>
-                </div>
-                
-                <div class="sidebar-section">
-                    <h3>Quick Stats</h3>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-number" id="total-tools">--</span>
-                            <span class="stat-label">Total Tools</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="open-source-count">--</span>
-                            <span class="stat-label">Open Source</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="decentralized-count">--</span>
-                            <span class="stat-label">Decentralized</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Featured</h3>
-                    <div class="featured-tool">
-                        <strong>Signal</strong>
-                        <p>Private messenger with end-to-end encryption</p>
-                    </div>
-                    <div class="featured-tool">
-                        <strong>Firefox</strong>
-                        <p>Privacy-focused open source browser</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-area">
-                <div class="content-header">
+            <!-- Sidebar with Filters -->
+            <aside class="sidebar">
+                <div class="filter-section">
+                    <h3><i class="fas fa-filter"></i> Filters</h3>
+                    
                     <div class="search-box">
-                        <input type="text" id="search-input" placeholder="Search tools...">
-                        <button id="search-btn">Search</button>
+                        <input type="text" id="search" placeholder="Search apps...">
+                        <i class="fas fa-search"></i>
                     </div>
+
+                    <div class="filter-group">
+                        <h4><i class="fas fa-tags"></i> Categories</h4>
+                        <div id="category-filters" class="filter-tags"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4><i class="fas fa-hashtag"></i> Popular Tags</h4>
+                        <div id="tag-filters" class="filter-tags"></div>
+                    </div>
+
+                    <button id="clear-filters" class="clear-btn">
+                        <i class="fas fa-times"></i> Clear All Filters
+                    </button>
+                </div>
+
+                <div class="info-box">
+                    <h4><i class="fas fa-info-circle"></i> About</h4>
+                    <p>This directory lists decentralized, open-source, privacy-focused applications that respect your freedom.</p>
+                    <p>All apps are community-vetted and free from Google services.</p>
+                </div>
+            </aside>
+
+            <!-- Main App Listing -->
+            <main class="app-listing">
+                <div class="controls">
                     <div class="sort-controls">
-                        <label for="sort-select">Sort by:</label>
-                        <select id="sort-select">
-                            <option value="name">Name (A-Z)</option>
-                            <option value="name-desc">Name (Z-A)</option>
-                            <option value="category">Category</option>
-                            <option value="privacy">Privacy Level</option>
+                        <select id="sort-by">
+                            <option value="name">Sort by: Name</option>
+                            <option value="rating">Sort by: Rating</option>
+                            <option value="newest">Sort by: Newest</option>
                         </select>
                     </div>
-                </div>
-
-                <div class="tools-list" id="tools-container">
-                    <!-- Tools will be loaded here by JavaScript -->
-                    <div class="loading">Loading tools...</div>
-                </div>
-
-                <div class="info-section">
-                    <h3 id="about">About This Directory</h3>
-                    <p>This is a community-curated directory of tools that respect your privacy, promote decentralization, and offer alternatives to Google and other surveillance-capitalism services.</p>
-                    
-                    <div class="principles">
-                        <div class="principle">
-                            <h4>Decentralized</h4>
-                            <p>No single point of control or failure</p>
-                        </div>
-                        <div class="principle">
-                            <h4>Open Source</h4>
-                            <p>Transparent code that can be audited</p>
-                        </div>
-                        <div class="principle">
-                            <h4>Privacy-First</h4>
-                            <p>Designed to protect user data</p>
-                        </div>
-                        <div class="principle">
-                            <h4>De-Googled</h4>
-                            <p>Alternatives to Google services</p>
-                        </div>
-                    </div>
-
-                    <div class="submit-section" id="submit">
-                        <h3>Submit a Tool</h3>
-                        <p>Know a tool that should be listed? <a href="https://github.com/yourusername/decentralized-directory/issues/new" target="_blank">Submit it on GitHub</a> or <a href="mailto:youremail@example.com">email us</a>.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="right-sidebar">
-                <div class="sidebar-section">
-                    <h3>Privacy Tips</h3>
-                    <ul class="tips-list">
-                        <li>Use different passwords for different services</li>
-                        <li>Enable two-factor authentication</li>
-                        <li>Regularly update your software</li>
-                        <li>Use a VPN on public Wi-Fi</li>
-                        <li>Review app permissions regularly</li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Top Alternatives</h3>
-                    <div class="alternative">
-                        <strong>Instead of Gmail:</strong>
-                        <p>ProtonMail, Tutanota</p>
-                    </div>
-                    <div class="alternative">
-                        <strong>Instead of Chrome:</strong>
-                        <p>Firefox, Brave</p>
-                    </div>
-                    <div class="alternative">
-                        <strong>Instead of Google Search:</strong>
-                        <p>DuckDuckGo, Startpage</p>
-                    </div>
-                    <div class="alternative">
-                        <strong>Instead of WhatsApp:</strong>
-                        <p>Signal, Element</p>
+                    <div class="pagination-info">
+                        Showing <span id="start-index">1</span>-<span id="end-index">20</span> of <span id="total-count">111</span>
                     </div>
                 </div>
 
-                <div class="sidebar-section">
-                    <h3>Resources</h3>
-                    <ul class="resources-list">
-                        <li><a href="https://privacyguides.org/" target="_blank">Privacy Guides</a></li>
-                        <li><a href="https://www.privacytools.io/" target="_blank">PrivacyTools.io</a></li>
-                        <li><a href="https://degoogle.jmoore.dev/" target="_blank">De-Google Guide</a></li>
-                        <li><a href="https://www.eff.org/" target="_blank">Electronic Frontier Foundation</a></li>
-                    </ul>
+                <!-- Apps Container -->
+                <div id="apps-container" class="apps-container">
+                    <!-- Apps will be loaded here by JavaScript -->
                 </div>
-            </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button id="prev-page" class="page-btn">
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    <div id="page-numbers" class="page-numbers">
+                        <!-- Page numbers will be generated here -->
+                    </div>
+                    <button id="next-page" class="page-btn">
+                        Next <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </main>
         </div>
 
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Decentralized Directory</h4>
-                    <p>A community resource for privacy and freedom.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>License</h4>
-                    <p>This site is open source. Data available under CC BY-SA 4.0.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Hosting</h4>
-                    <p>Hosted on GitHub Pages. No tracking, no cookies.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>Last updated: <span id="current-date"></span> | <a href="https://github.com/yourusername/decentralized-directory" target="_blank">View on GitHub</a></p>
-            </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Decentralized Apps Directory • Open Source • 
+                <a href="https://github.com/yourusername/decentralized-apps-directory" target="_blank">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </p>
+            <p class="disclaimer">
+                This directory is community-maintained. All applications are open-source and privacy-focused.
+            </p>
         </footer>
     </div>
 
+    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
