@@ -202,5 +202,377 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Password Generator Modal -->
+<div class="modal-overlay" id="password-modal" style="display: none;">
+    <div class="modal-content" style="max-width: 500px;">
+        <div class="modal-header">
+            <h3>🔐 Secure Password Generator</h3>
+            <button class="close-modal" onclick="closePasswordModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="password-display">
+                <input type="text" id="generated-password" readonly>
+                <div class="password-strength" id="password-strength">
+                    <div class="strength-bar"></div>
+                    <span class="strength-text">Strength: --</span>
+                </div>
+            </div>
+            
+            <div class="generator-controls">
+                <div class="control-group">
+                    <label for="password-length">Length: <span id="length-value">16</span></label>
+                    <input type="range" id="password-length" min="8" max="64" value="16">
+                </div>
+                
+                <div class="control-group">
+                    <label><input type="checkbox" id="uppercase" checked> Uppercase (A-Z)</label>
+                    <label><input type="checkbox" id="lowercase" checked> Lowercase (a-z)</label>
+                    <label><input type="checkbox" id="numbers" checked> Numbers (0-9)</label>
+                    <label><input type="checkbox" id="symbols" checked> Symbols (!@#$%)</label>
+                </div>
+                
+                <div class="control-group">
+                    <label><input type="checkbox" id="avoid-ambiguous"> Avoid ambiguous characters (l,1,I,0,O)</label>
+                    <label><input type="checkbox" id="avoid-similar"> Avoid similar characters (i,l,1,|)</label>
+                </div>
+                
+                <div class="control-group">
+                    <label for="passphrase">Generate passphrase instead:</label>
+                    <select id="passphrase-option">
+                        <option value="no">No</option>
+                        <option value="yes">Yes (3 words)</option>
+                        <option value="yes4">Yes (4 words)</option>
+                        <option value="yes5">Yes (5 words)</option>
+                    </select>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn-generate" onclick="generatePassword()">Generate Password</button>
+                    <button class="btn-copy" onclick="copyPassword()" id="copy-btn">Copy Password</button>
+                </div>
+            </div>
+            
+            <div class="password-tips">
+                <h4>🔒 Password Security Tips:</h4>
+                <ul>
+                    <li>Use a different password for each service</li>
+                    <li>Store passwords in a password manager (like Bitwarden)</li>
+                    <li>Enable two-factor authentication when available</li>
+                    <li>Never share passwords via email or chat</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this to your header or somewhere visible -->
+<div class="password-generator-btn" onclick="openPasswordModal()">
+    🔐 Generate Secure Password
+</div>
+
+<!-- Add this to your existing script section -->
+<script>
+// Password Generator Functions
+const charSets = {
+    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+    numbers: '0123456789',
+    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+};
+
+// Word list for passphrases (common words)
+const wordList = [
+    'correct', 'horse', 'battery', 'staple', 'cloud', 'forest', 'river', 'mountain',
+    'ocean', 'valley', 'sunset', 'morning', 'evening', 'whisper', 'silence', 'echo',
+    'shadow', 'light', 'spark', 'flame', 'water', 'earth', 'wind', 'fire',
+    'secret', 'hidden', 'secure', 'private', 'strong', 'unique', 'random', 'crypto',
+    'privacy', 'freedom', 'secure', 'digital', 'analog', 'quantum', 'binary', 'logic'
+];
+
+function openPasswordModal() {
+    document.getElementById('password-modal').style.display = 'flex';
+    generatePassword(); // Generate a password when opening
+}
+
+function closePasswordModal() {
+    document.getElementById('password-modal').style.display = 'none';
+    // Clear the password from memory
+    document.getElementById('generated-password').value = '';
+}
+
+function generatePassword() {
+    const length = parseInt(document.getElementById('password-length').value);
+    const useUppercase = document.getElementById('uppercase').checked;
+    const useLowercase = document.getElementById('lowercase').checked;
+    const useNumbers = document.getElementById('numbers').checked;
+    const useSymbols = document.getElementById('symbols').checked;
+    const avoidAmbiguous = document.getElementById('avoid-ambiguous').checked;
+    const avoidSimilar = document.getElementById('avoid-similar').checked;
+    const passphraseOption = document.getElementById('passphrase-option').value;
+    
+    let password = '';
+    
+    if (passphraseOption !== 'no') {
+        // Generate passphrase
+        const wordCount = passphraseOption === 'yes' ? 3 : 
+                         passphraseOption === 'yes4' ? 4 : 5;
+        password = generatePassphrase(wordCount);
+    } else {
+        // Generate traditional password
+        password = generateTraditionalPassword(
+            length, useUppercase, useLowercase, 
+            useNumbers, useSymbols, avoidAmbiguous, avoidSimilar
+        );
+    }
+    
+    document.getElementById('generated-password').value = password;
+    updatePasswordStrength(password);
+}
+
+function generateTraditionalPassword(length, uppercase, lowercase, numbers, symbols, avoidAmbiguous, avoidSimilar) {
+    // Build character pool based on selections
+    let charPool = '';
+    
+    if (uppercase) {
+        let upperChars = charSets.uppercase;
+        if (avoidAmbiguous) upperChars = removeAmbiguous(upperChars);
+        if (avoidSimilar) upperChars = removeSimilar(upperChars, 'uppercase');
+        charPool += upperChars;
+    }
+    
+    if (lowercase) {
+        let lowerChars = charSets.lowercase;
+        if (avoidAmbiguous) lowerChars = removeAmbiguous(lowerChars);
+        if (avoidSimilar) lowerChars = removeSimilar(lowerChars, 'lowercase');
+        charPool += lowerChars;
+    }
+    
+    if (numbers) {
+        let numChars = charSets.numbers;
+        if (avoidAmbiguous) numChars = removeAmbiguous(numChars);
+        if (avoidSimilar) numChars = removeSimilar(numChars, 'numbers');
+        charPool += numChars;
+    }
+    
+    if (symbols) {
+        let symChars = charSets.symbols;
+        if (avoidAmbiguous) symChars = removeAmbiguous(symChars);
+        if (avoidSimilar) symChars = removeSimilar(symChars, 'symbols');
+        charPool += symChars;
+    }
+    
+    // If no character types selected, use all
+    if (!charPool) {
+        charPool = charSets.uppercase + charSets.lowercase + charSets.numbers + charSets.symbols;
+    }
+    
+    // Generate password using cryptographically secure random if available
+    let password = '';
+    try {
+        // Try using crypto API for better randomness
+        const cryptoArray = new Uint32Array(length);
+        window.crypto.getRandomValues(cryptoArray);
+        
+        for (let i = 0; i < length; i++) {
+            password += charPool[cryptoArray[i] % charPool.length];
+        }
+    } catch (e) {
+        // Fallback to Math.random if crypto API not available
+        for (let i = 0; i < length; i++) {
+            const randomIndex = Math.floor(Math.random() * charPool.length);
+            password += charPool[randomIndex];
+        }
+    }
+    
+    return password;
+}
+
+function generatePassphrase(wordCount) {
+    let passphrase = '';
+    try {
+        // Use crypto API for better randomness
+        const cryptoArray = new Uint32Array(wordCount);
+        window.crypto.getRandomValues(cryptoArray);
+        
+        for (let i = 0; i < wordCount; i++) {
+            if (i > 0) passphrase += '-';
+            const randomIndex = cryptoArray[i] % wordList.length;
+            passphrase += wordList[randomIndex];
+        }
+    } catch (e) {
+        // Fallback
+        for (let i = 0; i < wordCount; i++) {
+            if (i > 0) passphrase += '-';
+            const randomIndex = Math.floor(Math.random() * wordList.length);
+            passphrase += wordList[randomIndex];
+        }
+    }
+    
+    // Add a random number at the end for extra security
+    const randomNum = Math.floor(Math.random() * 100);
+    passphrase += randomNum;
+    
+    return passphrase;
+}
+
+function removeAmbiguous(chars) {
+    // Remove ambiguous characters: l,1,I,0,O
+    return chars.replace(/[l1I0O]/g, '');
+}
+
+function removeSimilar(chars, type) {
+    // Remove visually similar characters
+    let similarChars = '';
+    switch(type) {
+        case 'uppercase':
+            similarChars = 'I1l|';
+            break;
+        case 'lowercase':
+            similarChars = 'il1|';
+            break;
+        case 'numbers':
+            similarChars = '01lI|';
+            break;
+        case 'symbols':
+            similarChars = '|';
+            break;
+    }
+    
+    let result = chars;
+    for (let char of similarChars) {
+        result = result.replace(new RegExp(`[${char}]`, 'g'), '');
+    }
+    return result;
+}
+
+function updatePasswordStrength(password) {
+    const strengthBar = document.querySelector('.strength-bar');
+    const strengthText = document.querySelector('.strength-text');
+    
+    let score = 0;
+    
+    // Length check
+    if (password.length >= 12) score += 25;
+    else if (password.length >= 8) score += 15;
+    else score += 5;
+    
+    // Character variety checks
+    if (/[A-Z]/.test(password)) score += 15;
+    if (/[a-z]/.test(password)) score += 15;
+    if (/[0-9]/.test(password)) score += 15;
+    if (/[^A-Za-z0-9]/.test(password)) score += 15;
+    
+    // Entropy bonus
+    const uniqueChars = new Set(password).size;
+    if (uniqueChars / password.length > 0.7) score += 15;
+    
+    // Cap at 100
+    score = Math.min(score, 100);
+    
+    // Update display
+    strengthBar.style.width = `${score}%`;
+    
+    // Set color and text based on score
+    let strength = '';
+    let color = '';
+    
+    if (score < 40) {
+        strength = 'Weak';
+        color = '#d73a49';
+    } else if (score < 70) {
+        strength = 'Fair';
+        color = '#f66a0a';
+    } else if (score < 90) {
+        strength = 'Good';
+        color = '#ffd33d';
+    } else {
+        strength = 'Strong';
+        color = '#28a745';
+    }
+    
+    strengthBar.style.backgroundColor = color;
+    strengthText.textContent = `Strength: ${strength} (${score}/100)`;
+    strengthText.style.color = color;
+}
+
+function copyPassword() {
+    const passwordField = document.getElementById('generated-password');
+    const copyBtn = document.getElementById('copy-btn');
+    
+    // Select the text
+    passwordField.select();
+    passwordField.setSelectionRange(0, 99999); // For mobile devices
+    
+    try {
+        // Try using the modern Clipboard API
+        navigator.clipboard.writeText(passwordField.value).then(() => {
+            // Success feedback
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = '✓ Copied!';
+            copyBtn.style.backgroundColor = '#28a745';
+            
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+                copyBtn.style.backgroundColor = '';
+            }, 2000);
+        }).catch(err => {
+            // Fallback to execCommand
+            fallbackCopy();
+        });
+    } catch (err) {
+        fallbackCopy();
+    }
+    
+    function fallbackCopy() {
+        document.execCommand('copy');
+        // Success feedback
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied!';
+        copyBtn.style.backgroundColor = '#28a745';
+        
+        setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.style.backgroundColor = '';
+        }, 2000);
+    }
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Update length display when slider changes
+    const lengthSlider = document.getElementById('password-length');
+    const lengthValue = document.getElementById('length-value');
+    
+    lengthSlider.addEventListener('input', function() {
+        lengthValue.textContent = this.value;
+    });
+    
+    // Close modal when clicking outside
+    document.getElementById('password-modal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closePasswordModal();
+        }
+    });
+    
+    // Generate on Enter key in modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && document.getElementById('password-modal').style.display === 'flex') {
+            generatePassword();
+        }
+        if (e.key === 'Escape') {
+            closePasswordModal();
+        }
+    });
+    
+    // Auto-generate when any setting changes
+    const settings = ['uppercase', 'lowercase', 'numbers', 'symbols', 
+                      'avoid-ambiguous', 'avoid-similar', 'passphrase-option'];
+    settings.forEach(id => {
+        document.getElementById(id).addEventListener('change', generatePassword);
+    });
+});
+</script>
+    
 </body>
 </html>
