@@ -1,1002 +1,246 @@
-[
-  {
-    "id": 1,
-    "name": "Signal",
-    "url": "https://signal.org",
-    "description": "Private messenger with end-to-end encryption",
-    "categories": ["Messaging", "Communication"],
-    "tags": ["encrypted", "privacy", "open-source", "e2ee"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 2,
-    "name": "ProtonMail",
-    "url": "https://protonmail.com",
-    "description": "Secure email service with end-to-end encryption",
-    "categories": ["Email", "Communication"],
-    "tags": ["encrypted", "privacy", "email", "security"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 3,
-    "name": "Nextcloud",
-    "url": "https://nextcloud.com",
-    "description": "Self-hosted productivity platform and file sync",
-    "categories": ["Cloud", "Productivity"],
-    "tags": ["self-hosted", "foss", "cloud", "sync"],
-    "ratings": [5, 4, 5, 4, 5]
-  },
-  {
-    "id": 4,
-    "name": "Bitwarden",
-    "url": "https://bitwarden.com",
-    "description": "Open source password manager",
-    "categories": ["Security", "Tools"],
-    "tags": ["password-manager", "security", "open-source"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 5,
-    "name": "Mozilla Firefox",
-    "url": "https://www.mozilla.org/firefox/",
-    "description": "Privacy-focused web browser",
-    "categories": ["Browser", "Internet"],
-    "tags": ["browser", "privacy", "open-source"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 6,
-    "name": "Jitsi Meet",
-    "url": "https://meet.jit.si",
-    "description": "Open source video conferencing",
-    "categories": ["Communication", "Video"],
-    "tags": ["video-call", "open-source", "encrypted"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 7,
-    "name": "Element",
-    "url": "https://element.io",
-    "description": "Secure messaging and collaboration via Matrix",
-    "categories": ["Messaging", "Communication"],
-    "tags": ["matrix", "encrypted", "decentralized"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 8,
-    "name": "ProtonVPN",
-    "url": "https://protonvpn.com",
-    "description": "Secure and private VPN service",
-    "categories": ["Security", "Networking"],
-    "tags": ["vpn", "privacy", "encrypted"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 9,
-    "name": "Standard Notes",
-    "url": "https://standardnotes.com",
-    "description": "End-to-end encrypted note-taking app",
-    "categories": ["Productivity", "Tools"],
-    "tags": ["encrypted", "notes", "privacy"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 10,
-    "name": "LineageOS",
-    "url": "https://lineageos.org",
-    "description": "Android distribution for phones and tablets",
-    "categories": ["Mobile", "Operating System"],
-    "tags": ["android", "foss", "de-googled"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 11,
-    "name": "DuckDuckGo",
-    "url": "https://duckduckgo.com",
-    "description": "Privacy-focused search engine",
-    "categories": ["Search", "Internet"],
-    "tags": ["search-engine", "privacy", "tracking-protection"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 12,
-    "name": "Syncthing",
-    "url": "https://syncthing.net",
-    "description": "Continuous file synchronization program",
-    "categories": ["Sync", "Tools"],
-    "tags": ["file-sync", "p2p", "open-source"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 13,
-    "name": "LibreOffice",
-    "url": "https://www.libreoffice.org",
-    "description": "Free and open source office suite",
-    "categories": ["Productivity", "Office"],
-    "tags": ["office", "foss", "document-editor"],
-    "ratings": [5, 4, 5, 4, 5]
-  },
-  {
-    "id": 14,
-    "name": "Tutanota",
-    "url": "https://tutanota.com",
-    "description": "Secure email service with built-in encryption",
-    "categories": ["Email", "Communication"],
-    "tags": ["encrypted-email", "privacy", "security"],
-    "ratings": [4, 5, 4, 5, 4]
-  },
-  {
-    "id": 15,
-    "name": "Joplin",
-    "url": "https://joplinapp.org",
-    "description": "Open source note-taking and to-do application",
-    "categories": ["Productivity", "Tools"],
-    "tags": ["notes", "markdown", "sync"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 16,
-    "name": "VLC Media Player",
-    "url": "https://www.videolan.org/vlc/",
-    "description": "Free and open source cross-platform multimedia player",
-    "categories": ["Media", "Entertainment"],
-    "tags": ["media-player", "foss", "cross-platform"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 17,
-    "name": "GIMP",
-    "url": "https://www.gimp.org",
-    "description": "GNU Image Manipulation Program",
-    "categories": ["Graphics", "Tools"],
-    "tags": ["image-editor", "foss", "photoshop-alternative"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 18,
-    "name": "Brave Browser",
-    "url": "https://brave.com",
-    "description": "Privacy-focused browser with built-in ad blocker",
-    "categories": ["Browser", "Internet"],
-    "tags": ["browser", "privacy", "ad-blocker"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 19,
-    "name": "KeePassXC",
-    "url": "https://keepassxc.org",
-    "description": "Community fork of KeePass password manager",
-    "categories": ["Security", "Tools"],
-    "tags": ["password-manager", "offline", "security"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 20,
-    "name": "F-Droid",
-    "url": "https://f-droid.org",
-    "description": "Installable catalogue of FOSS applications for Android",
-    "categories": ["Mobile", "App Store"],
-    "tags": ["android", "foss", "app-store"],
-    "ratings": [5, 5, 5, 5, 4]
-  },
-  {
-    "id": 21,
-    "name": "Calibre",
-    "url": "https://calibre-ebook.com",
-    "description": "E-book management software",
-    "categories": ["Media", "Tools"],
-    "tags": ["ebook", "library-management", "foss"],
-    "ratings": [5, 4, 5, 5, 4]
-  }
+{
+  "tools": [
     {
-    "id": 22,
-    "name": "Tor Browser",
-    "url": "https://www.torproject.org",
-    "description": "Web browser for anonymous web browsing via Tor network",
-    "categories": ["Browser", "Security"],
-    "tags": ["anonymity", "tor", "privacy", "onion"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 23,
-    "name": "Mastodon",
-    "url": "https://joinmastodon.org",
-    "description": "Decentralized social networking platform",
-    "categories": ["Social", "Communication"],
-    "tags": ["federated", "social-media", "open-source", "activitypub"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 24,
-    "name": "PeerTube",
-    "url": "https://joinpeertube.org",
-    "description": "Decentralized video hosting platform",
-    "categories": ["Media", "Video"],
-    "tags": ["video-hosting", "federated", "youtube-alternative", "p2p"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 25,
-    "name": "Pixelfed",
-    "url": "https://pixelfed.org",
-    "description": "Decentralized image sharing platform",
-    "categories": ["Social", "Media"],
-    "tags": ["instagram-alternative", "federated", "photo-sharing", "activitypub"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 26,
-    "name": "Matrix",
-    "url": "https://matrix.org",
-    "description": "Open network for secure, decentralized communication",
-    "categories": ["Messaging", "Communication"],
-    "tags": ["decentralized", "encrypted", "protocol", "open-standard"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 27,
-    "name": "Jami",
-    "url": "https://jami.net",
-    "description": "Distributed communication platform with no central server",
-    "categories": ["Communication", "Messaging"],
-    "tags": ["p2p", "distributed", "encrypted", "video-call"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 28,
-    "name": "Session",
-    "url": "https://getsession.org",
-    "description": "End-to-end encrypted messenger that removes sensitive metadata",
-    "categories": ["Messaging", "Security"],
-    "tags": ["encrypted", "metadata-free", "privacy", "anonymous"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 29,
-    "name": "Briar",
-    "url": "https://briarproject.org",
-    "description": "Messaging app that works without internet via Bluetooth/WiFi",
-    "categories": ["Messaging", "Communication"],
-    "tags": ["offline-messaging", "p2p", "encrypted", "android"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 30,
-    "name": "Tails",
-    "url": "https://tails.boum.org",
-    "description": "Live operating system that protects against surveillance",
-    "categories": ["Operating System", "Security"],
-    "tags": ["live-os", "privacy", "amnesiac", "tor"],
-    "ratings": [5, 5, 5, 5, 4]
-  },
-  {
-    "id": 31,
-    "name": "Qubes OS",
-    "url": "https://www.qubes-os.org",
-    "description": "Security-oriented operating system with compartmentalization",
-    "categories": ["Operating System", "Security"],
-    "tags": ["security", "compartmentalization", "virtualization", "xen"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 32,
-    "name": "Alpine Linux",
-    "url": "https://alpinelinux.org",
-    "description": "Security-oriented, lightweight Linux distribution",
-    "categories": ["Operating System", "Server"],
-    "tags": ["lightweight", "security", "container-friendly", "musl-libc"],
-    "ratings": [5, 4, 5, 4, 5]
-  },
-  {
-    "id": 33,
-    "name": "OpenStreetMap",
-    "url": "https://www.openstreetmap.org",
-    "description": "Collaborative project to create a free editable map of the world",
-    "categories": ["Maps", "Data"],
-    "tags": ["open-data", "maps", "crowdsourced", "free"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 34,
-    "name": "OsmAnd",
-    "url": "https://osmand.net",
-    "description": "Offline mobile maps and navigation using OpenStreetMap",
-    "categories": ["Maps", "Mobile"],
-    "tags": ["offline-maps", "navigation", "openstreetmap", "android"],
-    "ratings": [4, 5, 4, 5, 4]
-  },
-  {
-    "id": 35,
-    "name": "Organic Maps",
-    "url": "https://organicmaps.app",
-    "description": "Fast offline maps for travelers, tourists, hikers, and cyclists",
-    "categories": ["Maps", "Mobile"],
-    "tags": ["offline-maps", "privacy-focused", "openstreetmap", "ios-android"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 36,
-    "name": "Mumble",
-    "url": "https://www.mumble.info",
-    "description": "Open source, low-latency, high quality voice chat",
-    "categories": ["Communication", "Audio"],
-    "tags": ["voice-chat", "low-latency", "gaming", "open-source"],
-    "ratings": [4, 4, 5, 4, 5]
-  },
-  {
-    "id": 37,
-    "name": "Wire",
-    "url": "https://wire.com",
-    "description": "Secure collaboration platform with messaging, voice, and video",
-    "categories": ["Communication", "Security"],
-    "tags": ["encrypted", "team-collaboration", "e2ee", "business"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 38,
-    "name": "Threema",
-    "url": "https://threema.ch",
-    "description": "Privacy-focused instant messenger with end-to-end encryption",
-    "categories": ["Messaging", "Communication"],
-    "tags": ["encrypted", "swiss", "privacy", "paid"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 39,
-    "name": "SimpleX Chat",
-    "url": "https://simplex.chat",
-    "description": "Private messenger without user IDs (not even random)",
-    "categories": ["Messaging", "Security"],
-    "tags": ["anonymous", "metadata-free", "double-ratchet", "p2p"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 40,
-    "name": "Delta Chat",
-    "url": "https://delta.chat",
-    "description": "Chat over e-mail with end-to-end encryption",
-    "categories": ["Messaging", "Email"],
-    "tags": ["email-based", "encrypted", "decentralized", "autocrypt"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 41,
-    "name": "CryptPad",
-    "url": "https://cryptpad.fr",
-    "description": "Collaborative office suite with end-to-end encryption",
-    "categories": ["Productivity", "Collaboration"],
-    "tags": ["encrypted", "collaboration", "office-suite", "real-time"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 42,
-    "name": "Etherpad",
-    "url": "https://etherpad.org",
-    "description": "Real-time collaborative editor with self-hosting",
-    "categories": ["Productivity", "Collaboration"],
-    "tags": ["collaboration", "real-time", "self-hosted", "text-editor"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 43,
-    "name": "Outline",
-    "url": "https://www.getoutline.com",
-    "description": "Team knowledge base with Markdown editing",
-    "categories": ["Productivity", "Knowledge Base"],
-    "tags": ["wiki", "knowledge-base", "markdown", "team"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 44,
-    "name": "Zulip",
-    "url": "https://zulip.com",
-    "description": "Team chat with organized conversation threads",
-    "categories": ["Communication", "Collaboration"],
-    "tags": ["team-chat", "threaded", "open-source", "self-hosted"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 45,
-    "name": "Rocket.Chat",
-    "url": "https://rocket.chat",
-    "description": "Open source team communication platform",
-    "categories": ["Communication", "Collaboration"],
-    "tags": ["team-chat", "self-hosted", "slack-alternative", "open-source"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 46,
-    "name": "Mattermost",
-    "url": "https://mattermost.com",
-    "description": "Open source platform for secure team collaboration",
-    "categories": ["Communication", "Collaboration"],
-    "tags": ["team-chat", "self-hosted", "slack-alternative", "enterprise"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 47,
-    "name": "Discourse",
-    "url": "https://www.discourse.org",
-    "description": "Open source discussion platform",
-    "categories": ["Communication", "Forum"],
-    "tags": ["forum", "discussion", "self-hosted", "modern"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 48,
-    "name": "Ghost",
-    "url": "https://ghost.org",
-    "description": "Open source publishing platform",
-    "categories": ["Blogging", "CMS"],
-    "tags": ["blogging", "cms", "self-hosted", "newsletter"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 49,
-    "name": "Plausible Analytics",
-    "url": "https://plausible.io",
-    "description": "Simple, open source, privacy-friendly Google Analytics alternative",
-    "categories": ["Analytics", "Web"],
-    "tags": ["analytics", "privacy-friendly", "gdpr-compliant", "lightweight"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 50,
-    "name": "Matomo",
-    "url": "https://matomo.org",
-    "description": "Free and open source web analytics platform",
-    "categories": ["Analytics", "Web"],
-    "tags": ["analytics", "self-hosted", "google-analytics-alternative", "open-source"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 51,
-    "name": "Umami",
-    "url": "https://umami.is",
-    "description": "Simple, fast, privacy-focused alternative to Google Analytics",
-    "categories": ["Analytics", "Web"],
-    "tags": ["analytics", "privacy-focused", "simple", "self-hosted"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 52,
-    "name": "Searx",
-    "url": "https://searx.github.io/searx",
-    "description": "Privacy-respecting, hackable metasearch engine",
-    "categories": ["Search", "Internet"],
-    "tags": ["search-engine", "metasearch", "privacy", "self-hosted"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 53,
-    "name": "Whoogle",
-    "url": "https://github.com/benbusby/whoogle-search",
-    "description": "Self-hosted, ad-free, privacy-respecting Google metasearch wrapper",
-    "categories": ["Search", "Internet"],
-    "tags": ["search-engine", "google-frontend", "self-hosted", "privacy"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 54,
-    "name": "Libretranslate",
-    "url": "https://libretranslate.com",
-    "description": "Free and open source machine translation API",
-    "categories": ["Tools", "Translation"],
-    "tags": ["translation", "self-hosted", "open-source", "api"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 55,
-    "name": "ArchiveBox",
-    "url": "https://archivebox.io",
-    "description": "Self-hosted web archive and bookmarking",
-    "categories": ["Archiving", "Tools"],
-    "tags": ["archiving", "bookmarking", "self-hosted", "wget"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 56,
-    "name": "Wallabag",
-    "url": "https://wallabag.org",
-    "description": "Self-hosted read-it-later app",
-    "categories": ["Reading", "Tools"],
-    "tags": ["read-later", "pocket-alternative", "self-hosted", "open-source"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 57,
-    "name": "FreshRSS",
-    "url": "https://freshrss.org",
-    "description": "Self-hosted RSS feed aggregator",
-    "categories": ["News", "RSS"],
-    "tags": ["rss", "feed-reader", "self-hosted", "open-source"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 58,
-    "name": "Miniflux",
-    "url": "https://miniflux.app",
-    "description": "Minimalist and opinionated RSS feed reader",
-    "categories": ["News", "RSS"],
-    "tags": ["rss", "minimalist", "self-hosted", "golang"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 59,
-    "name": "Gitea",
-    "url": "https://gitea.io",
-    "description": "Lightweight self-hosted Git service",
-    "categories": ["Development", "Git"],
-    "tags": ["git", "self-hosted", "github-alternative", "golang"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 60,
-    "name": "Forgejo",
-    "url": "https://forgejo.org",
-    "description": "Self-hosted lightweight software forge",
-    "categories": ["Development", "Git"],
-    "tags": ["git", "self-hosted", "github-alternative", "community-driven"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 61,
-    "name": "Codeberg",
-    "url": "https://codeberg.org",
-    "description": "Git hosting powered by Gitea, based in EU",
-    "categories": ["Development", "Git"],
-    "tags": ["git-hosting", "eu-based", "privacy-friendly", "non-profit"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 62,
-    "name": "Radicle",
-    "url": "https://radicle.xyz",
-    "description": "Peer-to-peer stack for code collaboration",
-    "categories": ["Development", "Git"],
-    "tags": ["p2p", "git", "decentralized", "blockchain"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 63,
-    "name": "Invidious",
-    "url": "https://invidious.io",
-    "description": "Open source alternative front-end to YouTube",
-    "categories": ["Media", "Video"],
-    "tags": ["youtube-frontend", "privacy", "no-ads", "self-hosted"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 64,
-    "name": "Piped",
-    "url": "https://github.com/TeamPiped/Piped",
-    "description": "Privacy-friendly YouTube alternative frontend",
-    "categories": ["Media", "Video"],
-    "tags": ["youtube-frontend", "privacy", "pwa", "material-design"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 65,
-    "name": "Nitter",
-    "url": "https://nitter.net",
-    "description": "Free and open source alternative Twitter front-end",
-    "categories": ["Social", "Tools"],
-    "tags": ["twitter-frontend", "privacy", "no-js", "lightweight"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 66,
-    "name": "Libreddit",
-    "url": "https://libredd.it",
-    "description": "Private front-end for Reddit",
-    "categories": ["Social", "Tools"],
-    "tags": ["reddit-frontend", "privacy", "fast", "no-js"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 67,
-    "name": "Bibliogram",
-    "url": "https://git.sr.ht/~cadence/bibliogram",
-    "description": "Alternative front-end for Instagram",
-    "categories": ["Social", "Tools"],
-    "tags": ["instagram-frontend", "privacy", "no-account", "media-viewer"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 68,
-    "name": "LBRY/Odysee",
-    "url": "https://odysee.com",
-    "description": "Decentralized video sharing platform",
-    "categories": ["Media", "Video"],
-    "tags": ["decentralized", "video-sharing", "blockchain", "youtube-alternative"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 69,
-    "name": "Audacity",
-    "url": "https://www.audacityteam.org",
-    "description": "Free, open source, cross-platform audio software",
-    "categories": ["Audio", "Tools"],
-    "tags": ["audio-editor", "open-source", "cross-platform", "recording"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 70,
-    "name": "Ardour",
-    "url": "https://ardour.org",
-    "description": "Digital audio workstation",
-    "categories": ["Audio", "Tools"],
-    "tags": ["daw", "audio-production", "open-source", "linux"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 71,
-    "name": "OBS Studio",
-    "url": "https://obsproject.com",
-    "description": "Free and open source software for video recording and live streaming",
-    "categories": ["Video", "Streaming"],
-    "tags": ["streaming", "recording", "open-source", "video-production"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 72,
-    "name": "Kdenlive",
-    "url": "https://kdenlive.org",
-    "description": "Free and open source video editor",
-    "categories": ["Video", "Tools"],
-    "tags": ["video-editor", "open-source", "non-linear", "kde"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 73,
-    "name": "Shotcut",
-    "url": "https://shotcut.org",
-    "description": "Free, open source, cross-platform video editor",
-    "categories": ["Video", "Tools"],
-    "tags": ["video-editor", "open-source", "cross-platform", "simple"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 74,
-    "name": "Blender",
-    "url": "https://www.blender.org",
-    "description": "Free and open source 3D creation suite",
-    "categories": ["Graphics", "3D"],
-    "tags": ["3d", "animation", "open-source", "modeling"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 75,
-    "name": "Inkscape",
-    "url": "https://inkscape.org",
-    "description": "Free and open source vector graphics editor",
-    "categories": ["Graphics", "Tools"],
-    "tags": ["vector-graphics", "illustrator-alternative", "open-source", "svg"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 76,
-    "name": "Krita",
-    "url": "https://krita.org",
-    "description": "Free and open source digital painting application",
-    "categories": ["Graphics", "Art"],
-    "tags": ["digital-art", "painting", "open-source", "photoshop-alternative"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 77,
-    "name": "Darktable",
-    "url": "https://www.darktable.org",
-    "description": "Open source photography workflow application and raw developer",
-    "categories": ["Graphics", "Photography"],
-    "tags": ["photo-editing", "raw-processing", "lightroom-alternative", "open-source"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 78,
-    "name": "RawTherapee",
-    "url": "https://rawtherapee.com",
-    "description": "Cross-platform raw image processing program",
-    "categories": ["Graphics", "Photography"],
-    "tags": ["raw-processing", "photo-editing", "open-source", "non-destructive"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 79,
-    "name": "DigiKam",
-    "url": "https://www.digikam.org",
-    "description": "Professional photo management with the power of open source",
-    "categories": ["Graphics", "Photography"],
-    "tags": ["photo-management", "organizer", "open-source", "kde"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 80,
-    "name": "Grav",
-    "url": "https://getgrav.org",
-    "description": "Modern open source flat-file CMS",
-    "categories": ["CMS", "Web"],
-    "tags": ["cms", "flat-file", "markdown", "php"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 81,
-    "name": "Kirby",
-    "url": "https://getkirby.com",
-    "description": "Flexible flat-file CMS",
-    "categories": ["CMS", "Web"],
-    "tags": ["cms", "flat-file", "php", "commercial-open-source"],
-    "ratings": [5, 5, 4, 5, 4]
-  },
-  {
-    "id": 82,
-    "name": "Statamic",
-    "url": "https://statamic.com",
-    "description": "Flat-first CMS built with Laravel",
-    "categories": ["CMS", "Web"],
-    "tags": ["cms", "laravel", "flat-file", "php"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 83,
-    "name": "Grocy",
-    "url": "https://grocy.info",
-    "description": "ERP beyond your fridge - household management solution",
-    "categories": ["Productivity", "Home"],
-    "tags": ["household-management", "inventory", "meal-planning", "self-hosted"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 84,
-    "name": "Home Assistant",
-    "url": "https://www.home-assistant.io",
-    "description": "Open source home automation that puts local control and privacy first",
-    "categories": ["Home Automation", "IoT"],
-    "tags": ["smart-home", "iot", "local-control", "privacy"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 85,
-    "name": "Kodi",
-    "url": "https://kodi.tv",
-    "description": "Free and open source media player software",
-    "categories": ["Media", "Entertainment"],
-    "tags": ["media-center", "htpc", "open-source", "cross-platform"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 86,
-    "name": "Jellyfin",
-    "url": "https://jellyfin.org",
-    "description": "Free software media system for managing and streaming media",
-    "categories": ["Media", "Streaming"],
-    "tags": ["media-server", "plex-alternative", "self-hosted", "open-source"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 87,
-    "name": "Plex",
-    "url": "https://www.plex.tv",
-    "description": "Streaming media server with some proprietary components",
-    "categories": ["Media", "Streaming"],
-    "tags": ["media-server", "streaming", "mixed-source", "popular"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 88,
-    "name": "Emby",
-    "url": "https://emby.media",
-    "description": "Media server for personal streaming",
-    "categories": ["Media", "Streaming"],
-    "tags": ["media-server", "streaming", "mixed-source", "alternative"],
-    "ratings": [4, 4, 5, 4, 4]
-  },
-  {
-    "id": 89,
-    "name": "Stremio",
-    "url": "https://www.stremio.com",
-    "description": "Modern media center with plugins",
-    "categories": ["Media", "Streaming"],
-    "tags": ["media-center", "streaming-aggregator", "addons", "cross-platform"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 90,
-    "name": "Popcorn Time",
-    "url": "https://popcorntime.app",
-    "description": "Multi-platform, free software BitTorrent client with integrated media player",
-    "categories": ["Media", "Streaming"],
-    "tags": ["torrent-streaming", "p2p", "controversial", "nodejs"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 91,
-    "name": "qBittorrent",
-    "url": "https://www.qbittorrent.org",
-    "description": "Free and open source BitTorrent client",
-    "categories": ["File Sharing", "Tools"],
-    "tags": ["torrent-client", "open-source", "ad-free", "cross-platform"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 92,
-    "name": "Transmission",
-    "url": "https://transmissionbt.com",
-    "description": "Fast, easy, free BitTorrent client",
-    "categories": ["File Sharing", "Tools"],
-    "tags": ["torrent-client", "lightweight", "open-source", "minimal"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 93,
-    "name": "Deluge",
-    "url": "https://deluge-torrent.org",
-    "description": "Lightweight, cross-platform BitTorrent client",
-    "categories": ["File Sharing", "Tools"],
-    "tags": ["torrent-client", "python", "plugins", "cross-platform"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 94,
-    "name": "FreeTube",
-    "url": "https://freetubeapp.io",
-    "description": "Private YouTube client for desktop",
-    "categories": ["Media", "Desktop"],
-    "tags": ["youtube-client", "privacy", "desktop-app", "invidious"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 95,
-    "name": "NewPipe",
-    "url": "https://newpipe.net",
-    "description": "Lightweight YouTube frontend for Android",
-    "categories": ["Media", "Mobile"],
-    "tags": ["youtube-client", "android", "no-google", "background-play"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 96,
-    "name": "LibreTube",
-    "url": "https://libretube.app",
-    "description": "Privacy-friendly YouTube client for Android using Piped",
-    "categories": ["Media", "Mobile"],
-    "tags": ["youtube-client", "android", "privacy", "material-you"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 97,
-    "name": "Infinity for Reddit",
-    "url": "https://github.com/Docile-Alligator/Infinity-For-Reddit",
-    "description": "Beautiful Reddit client for Android",
-    "categories": ["Social", "Mobile"],
-    "tags": ["reddit-client", "android", "material-design", "ad-free"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 98,
-    "name": "Slide for Reddit",
-    "url": "https://github.com/ccrama/Slide",
-    "description": "Open source, ad free Reddit browser for Android and iOS",
-    "categories": ["Social", "Mobile"],
-    "tags": ["reddit-client", "android", "ios", "open-source"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 99,
-    "name": "Barinsta",
-    "url": "https://barinsta.austinhuang.me",
-    "description": "Open source alternative Instagram client for Android",
-    "categories": ["Social", "Mobile"],
-    "tags": ["instagram-client", "android", "open-source", "privacy"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 100,
-    "name": "Tusky",
-    "url": "https://tusky.app",
-    "description": "Lightweight Mastodon client for Android",
-    "categories": ["Social", "Mobile"],
-    "tags": ["mastodon-client", "android", "material-design", "federated"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 101,
-    "name": "Fedilab",
-    "url": "https://fedilab.app",
-    "description": "Multi-account Mastodon and Pleroma client for Android",
-    "categories": ["Social", "Mobile"],
-    "tags": ["mastodon-client", "android", "multi-account", "pleroma"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 102,
-    "name": "Mozilla Thunderbird",
-    "url": "https://www.thunderbird.net",
-    "description": "Free email application that's easy to set up and customize",
-    "categories": ["Email", "Desktop"],
-    "tags": ["email-client", "open-source", "desktop", "mozilla"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 103,
-    "name": "K-9 Mail",
-    "url": "https://k9mail.app",
-    "description": "Open source email client for Android",
-    "categories": ["Email", "Mobile"],
-    "tags": ["email-client", "android", "open-source", "imap"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 104,
-    "name": "FairEmail",
-    "url": "https://email.faircode.eu",
-    "description": "Fully featured, open source, privacy oriented email app for Android",
-    "categories": ["Email", "Mobile"],
-    "tags": ["email-client", "android", "privacy", "open-source"],
-    "ratings": [5, 5, 5, 4, 5]
-  },
-  {
-    "id": 105,
-    "name": "Disroot",
-    "url": "https://disroot.org",
-    "description": "Platform providing online services based on principles of freedom, privacy and federation",
-    "categories": ["Services", "Platform"],
-    "tags": ["email-provider", "cloud", "privacy", "federated"],
-    "ratings": [5, 4, 5, 5, 4]
-  },
-  {
-    "id": 106,
-    "name": "Automattic",
-    "url": "https://automattic.com",
-    "description": "Company behind WordPress.com, WooCommerce, Tumblr, and more",
-    "categories": ["Services", "Platform"],
-    "tags": ["wordpress", "open-source", "web-services", "company"],
-    "ratings": [4, 5, 4, 4, 5]
-  },
-  {
-    "id": 107,
-    "name": "EFF",
-    "url": "https://www.eff.org",
-    "description": "Electronic Frontier Foundation - defending digital privacy and free speech",
-    "categories": ["Organization", "Advocacy"],
-    "tags": ["privacy-advocacy", "non-profit", "digital-rights", "legal"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 108,
-    "name": "FSF",
-    "url": "https://www.fsf.org",
-    "description": "Free Software Foundation - promoting computer user freedom",
-    "categories": ["Organization", "Advocacy"],
-    "tags": ["free-software", "non-profit", "gnu", "advocacy"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 109,
-    "name": "Let's Encrypt",
-    "url": "https://letsencrypt.org",
-    "description": "Free, automated, and open certificate authority",
-    "categories": ["Security", "Web"],
-    "tags": ["ssl-certificates", "free", "automated", "non-profit"],
-    "ratings": [5, 5, 5, 5, 5]
-  },
-  {
-    "id": 110,
-    "name": "OpenSSL",
-    "url": "https://www.openssl.org",
-    "description": "Robust, commercial-grade, full-featured toolkit for TLS and SSL protocols",
-    "categories": ["Security", "Development"],
-    "tags": ["tls", "ssl", "cryptography", "open-source"],
-    "ratings": [5, 5, 4, 5, 5]
-  },
-  {
-    "id": 111,
-    "name": "Signal Protocol",
-    "url": "https://signal.org/docs/",
-    "description": "End-to-end encryption protocol used by Signal, WhatsApp, and others",
-    "categories": ["Security", "Protocol"],
-    "tags": ["encryption-protocol", "e2ee", "open-source", "double-ratchet"],
-    "ratings": [5, 5, 5, 5, 5]
-  }
-]
-]
+      "id": 1,
+      "name": "Brave Browser",
+      "url": "https://brave.com",
+      "description": "Privacy-focused browser that blocks trackers and ads by default.",
+      "category": "Browser",
+      "privacyScore": 85,
+      "tags": ["open-source", "tracker-blocking", "chromium-based"],
+      "rating": 4.2,
+      "ratingsCount": 1240
+    },
+    {
+      "id": 2,
+      "name": "ProtonMail",
+      "url": "https://protonmail.com",
+      "description": "Secure email service with end-to-end encryption and no tracking.",
+      "category": "Email",
+      "privacyScore": 90,
+      "tags": ["encrypted", "swiss-based", "open-source"],
+      "rating": 4.5,
+      "ratingsCount": 890
+    },
+    {
+      "id": 3,
+      "name": "Signal",
+      "url": "https://signal.org",
+      "description": "Private messenger with end-to-end encryption for calls and messages.",
+      "category": "Messaging",
+      "privacyScore": 95,
+      "tags": ["encrypted", "non-profit", "open-source"],
+      "rating": 4.7,
+      "ratingsCount": 2150
+    },
+    {
+      "id": 4,
+      "name": "Nextcloud",
+      "url": "https://nextcloud.com",
+      "description": "Self-hosted productivity platform and file synchronization.",
+      "category": "Cloud Storage",
+      "privacyScore": 88,
+      "tags": ["self-hosted", "open-source", "encrypted"],
+      "rating": 4.3,
+      "ratingsCount": 760
+    },
+    {
+      "id": 5,
+      "name": "DuckDuckGo",
+      "url": "https://duckduckgo.com",
+      "description": "Search engine that doesn't track your searches or personalize results.",
+      "category": "Search Engine",
+      "privacyScore": 82,
+      "tags": ["tracker-blocking", "no-tracking", "private-search"],
+      "rating": 4.0,
+      "ratingsCount": 1850
+    },
+    {
+      "id": 6,
+      "name": "Bitwarden",
+      "url": "https://bitwarden.com",
+      "description": "Open source password manager with end-to-end encryption.",
+      "category": "Password Manager",
+      "privacyScore": 87,
+      "tags": ["open-source", "encrypted", "cross-platform"],
+      "rating": 4.6,
+      "ratingsCount": 1340
+    },
+    {
+      "id": 7,
+      "name": "Mullvad VPN",
+      "url": "https://mullvad.net",
+      "description": "VPN service focused on privacy with no logging and anonymous accounts.",
+      "category": "VPN",
+      "privacyScore": 89,
+      "tags": ["no-logs", "wireguard", "anonymous"],
+      "rating": 4.4,
+      "ratingsCount": 920
+    },
+    {
+      "id": 8,
+      "name": "LineageOS",
+      "url": "https://lineageos.org",
+      "description": "Android-based operating system without Google apps or services.",
+      "category": "Mobile OS",
+      "privacyScore": 75,
+      "tags": ["open-source", "de-googled", "android"],
+      "rating": 4.1,
+      "ratingsCount": 680
+    },
+    {
+      "id": 9,
+      "name": "Jitsi Meet",
+      "url": "https://meet.jit.si",
+      "description": "Open source video conferencing with end-to-end encryption.",
+      "category": "Video Conferencing",
+      "privacyScore": 80,
+      "tags": ["open-source", "encrypted", "self-hosted"],
+      "rating": 4.0,
+      "ratingsCount": 540
+    },
+    {
+      "id": 10,
+      "name": "Standard Notes",
+      "url": "https://standardnotes.com",
+      "description": "End-to-end encrypted note-taking app with extended features.",
+      "category": "Note Taking",
+      "privacyScore": 84,
+      "tags": ["encrypted", "open-source", "cross-platform"],
+      "rating": 4.2,
+      "ratingsCount": 430
+    },
+    {
+      "id": 11,
+      "name": "LibreOffice",
+      "url": "https://libreoffice.org",
+      "description": "Free and open source office suite, a replacement for Microsoft Office.",
+      "category": "Office Suite",
+      "privacyScore": 92,
+      "tags": ["open-source", "offline", "cross-platform"],
+      "rating": 4.3,
+      "ratingsCount": 1250
+    },
+    {
+      "id": 12,
+      "name": "Element",
+      "url": "https://element.io",
+      "description": "Secure collaboration app with end-to-end encryption via Matrix protocol.",
+      "category": "Collaboration",
+      "privacyScore": 78,
+      "tags": ["encrypted", "open-source", "decentralized"],
+      "rating": 3.9,
+      "ratingsCount": 320
+    },
+    {
+      "id": 13,
+      "name": "Firefox Focus",
+      "url": "https://www.mozilla.org/en-US/firefox/browsers/mobile/focus/",
+      "description": "Privacy browser with tracking protection and automatic history deletion.",
+      "category": "Browser",
+      "privacyScore": 83,
+      "tags": ["tracker-blocking", "open-source", "mobile"],
+      "rating": 4.1,
+      "ratingsCount": 760
+    },
+    {
+      "id": 14,
+      "name": "Tutanota",
+      "url": "https://tutanota.com",
+      "description": "Secure email service with built-in encryption and calendar.",
+      "category": "Email",
+      "privacyScore": 88,
+      "tags": ["encrypted", "germany-based", "open-source"],
+      "rating": 4.2,
+      "ratingsCount": 590
+    },
+    {
+      "id": 15,
+      "name": "ProtonVPN",
+      "url": "https://protonvpn.com",
+      "description": "High-speed Swiss VPN that safeguards your privacy.",
+      "category": "VPN",
+      "privacyScore": 86,
+      "tags": ["no-logs", "swiss-based", "encrypted"],
+      "rating": 4.3,
+      "ratingsCount": 870
+    },
+    {
+      "id": 16,
+      "name": "/e/ OS",
+      "url": "https://e.foundation",
+      "description": "Android-based mobile OS completely de-googled and privacy-focused.",
+      "category": "Mobile OS",
+      "privacyScore": 77,
+      "tags": ["de-googled", "open-source", "android"],
+      "rating": 3.8,
+      "ratingsCount": 310
+    },
+    {
+      "id": 17,
+      "name": "Searx",
+      "url": "https://searx.me",
+      "description": "Privacy-respecting, hackable metasearch engine.",
+      "category": "Search Engine",
+      "privacyScore": 85,
+      "tags": ["metasearch", "self-hosted", "open-source"],
+      "rating": 4.0,
+      "ratingsCount": 290
+    },
+    {
+      "id": 18,
+      "name": "CryptPad",
+      "url": "https://cryptpad.fr",
+      "description": "Collaborative office suite with end-to-end encryption.",
+      "category": "Collaboration",
+      "privacyScore": 81,
+      "tags": ["encrypted", "real-time", "open-source"],
+      "rating": 3.9,
+      "ratingsCount": 210
+    },
+    {
+      "id": 19,
+      "name": "KeePassXC",
+      "url": "https://keepassxc.org",
+      "description": "Community fork of KeePass, a free and open source password manager.",
+      "category": "Password Manager",
+      "privacyScore": 90,
+      "tags": ["open-source", "offline", "local-storage"],
+      "rating": 4.4,
+      "ratingsCount": 690
+    },
+    {
+      "id": 20,
+      "name": "Qubes OS",
+      "url": "https://qubes-os.org",
+      "description": "Security-oriented operating system using virtualization for isolation.",
+      "category": "Desktop OS",
+      "privacyScore": 95,
+      "tags": ["security-focused", "virtualization", "open-source"],
+      "rating": 4.5,
+      "ratingsCount": 420
+    },
+    {
+      "id": 21,
+      "name": "NewPipe",
+      "url": "https://newpipe.net",
+      "description": "Lightweight YouTube client for Android without Google services.",
+      "category": "Media",
+      "privacyScore": 79,
+      "tags": ["youtube-client", "no-google", "open-source"],
+      "rating": 4.2,
+      "ratingsCount": 580
+    },
+    {
+      "id": 22,
+      "name": "Joplin",
+      "url": "https://joplinapp.org",
+      "description": "Open source note-taking app with end-to-end encryption.",
+      "category": "Note Taking",
+      "privacyScore": 82,
+      "tags": ["encrypted", "open-source", "markdown"],
+      "rating": 4.1,
+      "ratingsCount": 470
+    }
+  ]
+}
