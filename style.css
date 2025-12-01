@@ -609,4 +609,274 @@ footer {
         flex-wrap: wrap;
         gap: 8px;
     }
+/* Password Generator Button */
+.password-generator-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff4500;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+    font-size: 14px;
+    border: none;
+}
+
+.password-generator-btn:hover {
+    background-color: #ff5722;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid #5f99cf;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #cee3f8;
+    border-bottom: 1px solid #5f99cf;
+    border-radius: 3px 3px 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.close-modal:hover {
+    color: #ff4500;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+/* Password Display */
+.password-display {
+    margin-bottom: 20px;
+}
+
+#generated-password {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+#generated-password:focus {
+    outline: none;
+    border-color: #5f99cf;
+}
+
+.password-strength {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.strength-bar {
+    flex-grow: 1;
+    height: 6px;
+    background-color: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.strength-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.strength-text {
+    font-size: 12px;
+    color: #666;
+    min-width: 120px;
+}
+
+/* Generator Controls */
+.generator-controls {
+    margin-bottom: 20px;
+}
+
+.control-group {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.control-group:last-child {
+    border-bottom: none;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #333;
+    cursor: pointer;
+}
+
+.control-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.control-group input[type="range"] {
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.control-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-generate, .btn-copy {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.btn-generate {
+    background-color: #5f99cf;
+    color: white;
+}
+
+.btn-generate:hover {
+    background-color: #4a8bc7;
+}
+
+.btn-copy {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-copy:hover {
+    background-color: #5a6268;
+}
+
+/* Password Tips */
+.password-tips {
+    background-color: #f0f7ff;
+    border-radius: 3px;
+    padding: 15px;
+    margin-top: 20px;
+    border-left: 3px solid #5f99cf;
+}
+
+.password-tips h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 14px;
+}
+
+.password-tips ul {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: #555;
+}
+
+.password-tips li {
+    margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .password-generator-btn {
+        bottom: 10px;
+        right: 10px;
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+    
+    .modal-content {
+        max-height: 80vh;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+}
+
+/* For the floating button on mobile */
+@media (max-width: 480px) {
+    .password-generator-btn {
+        width: calc(100% - 20px);
+        left: 10px;
+        right: 10px;
+        text-align: center;
+    }
+}
 }
