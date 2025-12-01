@@ -3,309 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unbiased News</title>
-    <style>
-        /* Old Reddit-inspired styling */
-        body {
-            font-family: Verdana, Geneva, sans-serif;
-            font-size: 14px;
-            line-height: 1.4;
-            color: #222222;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            background-color: #cee3f8;
-            border-bottom: 1px solid #5f99cf;
-            padding: 10px 0;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-weight: bold;
-            font-size: 18px;
-            color: #ff4500;
-        }
-        
-        .nav-links a {
-            margin-left: 15px;
-            color: #369;
-            text-decoration: none;
-        }
-        
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-        
-        .content {
-            display: flex;
-            margin-top: 20px;
-        }
-        
-        .news-feed {
-            flex: 3;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        
-        .sidebar {
-            flex: 1;
-            margin-left: 20px;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            padding: 10px;
-        }
-        
-        .news-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .news-item:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .news-title {
-            font-weight: bold;
-            color: #369;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .news-title:hover {
-            text-decoration: underline;
-        }
-        
-        .news-meta {
-            font-size: 12px;
-            color: #888;
-            margin-top: 5px;
-        }
-        
-        .news-source {
-            color: #ff4500;
-        }
-        
-        .last-updated {
-            font-size: 12px;
-            color: #888;
-            text-align: center;
-            margin-top: 10px;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .error {
-            color: #ff4500;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .sidebar-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #369;
-        }
-        
-        .source-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .source-list li {
-            margin-bottom: 5px;
-        }
-        
-        .filter-controls {
-            margin-bottom: 15px;
-        }
-        
-        .filter-controls select {
-            width: 100%;
-            padding: 5px;
-        }
-        
-        @media (max-width: 768px) {
-            .content {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                margin-left: 0;
-                margin-top: 20px;
-            }
-        }
-    </style>
+    <meta name="description" content="Directory of decentralized apps, privacy tools, and de-Googled alternatives">
+    <title>Decentralized & Privacy Tools Directory</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/privacy.png">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">UNBIASED NEWS</div>
-                <div class="nav-links">
-                    <a href="#">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Sources</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    
     <div class="container">
-        <div class="content">
-            <div class="news-feed">
-                <div class="filter-controls">
-                    <select id="source-filter">
-                        <option value="all">All Sources</option>
-                        <option value="AP">Associated Press</option>
-                        <option value="Reuters">Reuters</option>
-                        <option value="BBC">BBC</option>
-                        <option value="NPR">NPR</option>
-                    </select>
-                </div>
-                
-                <div id="news-container">
-                    <div class="loading">Loading latest news...</div>
-                </div>
-                
-                <div class="last-updated" id="last-updated">
-                    Last updated: <span id="update-time">Never</span>
+        <header>
+            <div class="header-top">
+                <h1 class="logo">
+                    <span class="logo-icon">🌐</span>
+                    DECENTRALIZED DIRECTORY
+                </h1>
+                <div class="header-links">
+                    <a href="#browse" class="header-link">Browse</a>
+                    <a href="#submit" class="header-link">Submit</a>
+                    <a href="#about" class="header-link">About</a>
                 </div>
             </div>
-            
-            <div class="sidebar">
-                <div class="sidebar-title">About</div>
-                <p>This site aggregates news from sources known for their factual reporting and minimal bias.</p>
+            <p class="tagline">A curated list of decentralized apps, open-source privacy tools, and de-Googled alternatives</p>
+        </header>
+
+        <div class="main-content">
+            <div class="left-sidebar">
+                <div class="sidebar-section">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><button class="category-btn active" data-category="all">All Tools</button></li>
+                        <li><button class="category-btn" data-category="messaging">Messaging</button></li>
+                        <li><button class="category-btn" data-category="browser">Browsers</button></li>
+                        <li><button class="category-btn" data-category="search">Search Engines</button></li>
+                        <li><button class="category-btn" data-category="storage">Cloud Storage</button></li>
+                        <li><button class="category-btn" data-category="os">Operating Systems</button></li>
+                        <li><button class="category-btn" data-category="social">Social Media</button></li>
+                        <li><button class="category-btn" data-category="productivity">Productivity</button></li>
+                        <li><button class="category-btn" data-category="vpn">VPNs</button></li>
+                        <li><button class="category-btn" data-category="email">Email</button></li>
+                    </ul>
+                </div>
                 
-                <div class="sidebar-title">Sources</div>
-                <ul class="source-list">
-                    <li>Associated Press</li>
-                    <li>Reuters</li>
-                    <li>BBC News</li>
-                    <li>NPR</li>
-                </ul>
-                
-                <div class="sidebar-title">How It Works</div>
-                <p>Our system automatically collects and updates news every hour from trusted sources.</p>
+                <div class="sidebar-section">
+                    <h3>Quick Stats</h3>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number" id="total-tools">--</span>
+                            <span class="stat-label">Total Tools</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="open-source-count">--</span>
+                            <span class="stat-label">Open Source</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="decentralized-count">--</span>
+                            <span class="stat-label">Decentralized</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Featured</h3>
+                    <div class="featured-tool">
+                        <strong>Signal</strong>
+                        <p>Private messenger with end-to-end encryption</p>
+                    </div>
+                    <div class="featured-tool">
+                        <strong>Firefox</strong>
+                        <p>Privacy-focused open source browser</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <div class="content-header">
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search tools...">
+                        <button id="search-btn">Search</button>
+                    </div>
+                    <div class="sort-controls">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select">
+                            <option value="name">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                            <option value="category">Category</option>
+                            <option value="privacy">Privacy Level</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="tools-list" id="tools-container">
+                    <!-- Tools will be loaded here by JavaScript -->
+                    <div class="loading">Loading tools...</div>
+                </div>
+
+                <div class="info-section">
+                    <h3 id="about">About This Directory</h3>
+                    <p>This is a community-curated directory of tools that respect your privacy, promote decentralization, and offer alternatives to Google and other surveillance-capitalism services.</p>
+                    
+                    <div class="principles">
+                        <div class="principle">
+                            <h4>Decentralized</h4>
+                            <p>No single point of control or failure</p>
+                        </div>
+                        <div class="principle">
+                            <h4>Open Source</h4>
+                            <p>Transparent code that can be audited</p>
+                        </div>
+                        <div class="principle">
+                            <h4>Privacy-First</h4>
+                            <p>Designed to protect user data</p>
+                        </div>
+                        <div class="principle">
+                            <h4>De-Googled</h4>
+                            <p>Alternatives to Google services</p>
+                        </div>
+                    </div>
+
+                    <div class="submit-section" id="submit">
+                        <h3>Submit a Tool</h3>
+                        <p>Know a tool that should be listed? <a href="https://github.com/yourusername/decentralized-directory/issues/new" target="_blank">Submit it on GitHub</a> or <a href="mailto:youremail@example.com">email us</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-sidebar">
+                <div class="sidebar-section">
+                    <h3>Privacy Tips</h3>
+                    <ul class="tips-list">
+                        <li>Use different passwords for different services</li>
+                        <li>Enable two-factor authentication</li>
+                        <li>Regularly update your software</li>
+                        <li>Use a VPN on public Wi-Fi</li>
+                        <li>Review app permissions regularly</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Top Alternatives</h3>
+                    <div class="alternative">
+                        <strong>Instead of Gmail:</strong>
+                        <p>ProtonMail, Tutanota</p>
+                    </div>
+                    <div class="alternative">
+                        <strong>Instead of Chrome:</strong>
+                        <p>Firefox, Brave</p>
+                    </div>
+                    <div class="alternative">
+                        <strong>Instead of Google Search:</strong>
+                        <p>DuckDuckGo, Startpage</p>
+                    </div>
+                    <div class="alternative">
+                        <strong>Instead of WhatsApp:</strong>
+                        <p>Signal, Element</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Resources</h3>
+                    <ul class="resources-list">
+                        <li><a href="https://privacyguides.org/" target="_blank">Privacy Guides</a></li>
+                        <li><a href="https://www.privacytools.io/" target="_blank">PrivacyTools.io</a></li>
+                        <li><a href="https://degoogle.jmoore.dev/" target="_blank">De-Google Guide</a></li>
+                        <li><a href="https://www.eff.org/" target="_blank">Electronic Frontier Foundation</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Decentralized Directory</h4>
+                    <p>A community resource for privacy and freedom.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>License</h4>
+                    <p>This site is open source. Data available under CC BY-SA 4.0.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Hosting</h4>
+                    <p>Hosted on GitHub Pages. No tracking, no cookies.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Last updated: <span id="current-date"></span> | <a href="https://github.com/yourusername/decentralized-directory" target="_blank">View on GitHub</a></p>
+            </div>
+        </footer>
     </div>
 
-    <script>
-        // Sample news data - in a real implementation, this would come from a server
-        const sampleNews = [
-            {
-                title: "Global Summit Addresses Climate Change Concerns",
-                url: "#",
-                source: "AP",
-                timestamp: "1 hour ago",
-                summary: "World leaders gather to discuss new climate initiatives and carbon reduction targets."
-            },
-            {
-                title: "Economy Shows Signs of Recovery in Latest Report",
-                url: "#",
-                source: "Reuters",
-                timestamp: "2 hours ago",
-                summary: "New economic indicators suggest gradual improvement in key sectors."
-            },
-            {
-                title: "Breakthrough in Medical Research Announced",
-                url: "#",
-                source: "BBC",
-                timestamp: "3 hours ago",
-                summary: "Scientists report significant progress in treatment development for rare disease."
-            },
-            {
-                title: "Local Communities Implement Innovative Recycling Programs",
-                url: "#",
-                source: "NPR",
-                timestamp: "4 hours ago",
-                summary: "Municipalities across the country are adopting new approaches to waste management."
-            },
-            {
-                title: "Technology Conference Highlights Emerging Trends",
-                url: "#",
-                source: "AP",
-                timestamp: "5 hours ago",
-                summary: "Industry experts gather to discuss the future of artificial intelligence and automation."
-            }
-        ];
-
-        // Function to display news items
-        function displayNews(newsItems, filter = "all") {
-            const container = document.getElementById('news-container');
-            
-            // Filter news if needed
-            const filteredNews = filter === "all" 
-                ? newsItems 
-                : newsItems.filter(item => item.source === filter);
-            
-            // Clear container
-            container.innerHTML = '';
-            
-            if (filteredNews.length === 0) {
-                container.innerHTML = '<div class="error">No news found for the selected source.</div>';
-                return;
-            }
-            
-            // Add news items
-            filteredNews.forEach(item => {
-                const newsElement = document.createElement('div');
-                newsElement.className = 'news-item';
-                newsElement.innerHTML = `
-                    <a href="${item.url}" class="news-title">${item.title}</a>
-                    <div class="news-meta">
-                        <span class="news-source">${item.source}</span> • ${item.timestamp}
-                    </div>
-                    <div>${item.summary}</div>
-                `;
-                container.appendChild(newsElement);
-            });
-        }
-
-        // Function to update the last updated time
-        function updateTimestamp() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            document.getElementById('update-time').textContent = timeString;
-        }
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Display initial news
-            displayNews(sampleNews);
-            updateTimestamp();
-            
-            // Set up filter
-            document.getElementById('source-filter').addEventListener('change', function() {
-                displayNews(sampleNews, this.value);
-            });
-            
-            // Simulate hourly updates (in a real implementation, this would fetch from server)
-            setInterval(function() {
-                updateTimestamp();
-                // In a real implementation, we would fetch new data here
-                console.log("Checking for new news...");
-            }, 60 * 60 * 1000); // Every hour
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
