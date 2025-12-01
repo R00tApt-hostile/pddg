@@ -1,3 +1,229 @@
+// Add to top of script.js (with other variables)
+let currentPage = 1;
+const itemsPerPage = 20; // Show 20 tools per page
+
+// Update getFilteredTools function to handle pagination
+function getFilteredTools() {
+    let filtered = [...tools];
+    
+    // Filter by category
+    if (currentCategory !== 'all') {
+        filtered = filtered.filter(tool => tool.category === currentCategory);
+    }
+    
+    // Filter by search term
+    if (currentSearch) {
+        filtered = filtered.filter(tool => 
+            tool.name.toLowerCase().includes(currentSearch) ||
+            tool.description.toLowerCase().includes(currentSearch) ||
+            tool.category.toLowerCase().includes(currentSearch) ||
+            (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(currentSearch)))
+        );
+    }
+    
+    // Filter by active tags
+    if (activeTags.size > 0) {
+        filtered = filtered.filter(tool => {
+            if (!tool.tags) return false;
+            for (const tag of activeTags) {
+                if (!tool.tags.includes(tag)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
+    
+    // Sort tools
+    filtered.sort((a, b) => {
+        switch(currentSort) {
+            case 'name':
+                return a.name.localeCompare(b.name);
+            case 'name-desc':
+                return b.name.localeCompare(a.name);
+            case 'category':
+                return a.category.localeCompare(b.category) || a.name.localeCompare(b.name);
+            case 'privacy':
+                const privacyOrder = { high: 3, medium: 2, low: 1 };
+                return privacyOrder[b.privacyLevel] - privacyOrder[a.privacyLevel] || a.name.localeCompare(b.name);
+            case 'newest':
+                return b.id - a.id;
+            default:
+                return a.name.localeCompare(b.name);
+        }
+    });
+    
+    return filtered;
+}
+
+// Update renderTools function to include pagination
+function renderTools() {
+    const filteredTools = getFilteredTools();
+    const totalPages = Math.ceil(filteredTools.length / itemsPerPage);
+    
+    // Reset to page 1 if current page is invalid
+    if (currentPage > totalPages && totalPages > 0) {
+        currentPage = 1;
+    }
+    
+    // Get tools for current page
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const toolsToDisplay = filteredTools.slice(startIndex, endIndex);
+    
+    // Show no results message
+    if (filteredTools.length === 0) {
+        toolsContainer.innerHTML = `
+            <div class="no-results">
+                <p>No tools found matching your criteria.</p>
+                <p>Try a different search term, category, or clear tag filters.</p>
+            </div>
+        `;
+        // Hide pagination
+        document.getElementById('pagination').style.display = 'none';
+        return;
+    }
+    
+    // Render tools
+    toolsContainer.innerHTML = toolsToDisplay.map(tool => `
+        <div class="tool-item">
+            <div class="tool-header">
+                <a href="${tool.url}" target="_blank" class="tool-title">${tool.name}</a>
+                <span class="tool-category">${getCategoryLabel(tool.category)}</span>
+            </div>
+            <p class="tool-description">${tool.description}</p>
+            <div class="tool-meta">
+                ${tool.openSource ? '<span class="meta-item"><span class="meta-icon open-source">✓</span> Open Source</span>' : ''}
+                ${tool.decentralized ? '<span class="meta-item"><span class="meta-icon decentralized">⚡</span> Decentralized</span>' : ''}
+                <span class="meta-item">
+                    <span class="meta-icon privacy-${tool.privacyLevel}">🛡️</span>
+                    Privacy: ${getPrivacyLabel(tool.privacyLevel)}
+                </span>
+            </div>
+            ${tool.tags && tool.tags.length > 0 ? `
+                <div class="tool-tags">
+                    ${tool.tags.map(tag => `<span class="tool-tag">${tag}</span>`).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
+    
+    // Update pagination
+    updatePagination(filteredTools.length, totalPages);
+}
+
+// Add pagination controls
+function updatePagination(totalItems, totalPages) {
+    const paginationContainer = document.getElementById('pagination');
+    if (!paginationContainer) {
+        // Create pagination if it doesn't exist
+        const paginationHTML = `
+            <div class="pagination" id="pagination">
+                <button id="prev-page" disabled>Previous</button>
+                <span class="pagination-info" id="page-info">Page 1 of ${totalPages}</span>
+                <button id="next-page">Next</button>
+            </div>
+        `;
+        toolsContainer.insertAdjacentHTML('afterend', paginationHTML);
+    } else {
+        paginationContainer.innerHTML = `
+            <button id="prev-page" ${currentPage === 1 ? 'disabled' : ''}>Previous</button>
+            <span class="pagination-info" id="page-info">Page ${currentPage} of ${totalPages} (${totalItems} tools)</span>
+            <button id="next-page" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>
+        `;
+        paginationContainer.style.display = 'flex';
+    }
+    
+    // Add event listeners
+    document.getElementById('prev-page')?.addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTools();
+            window.scrollTo({ top: toolsContainer.offsetTop - 100, behavior: 'smooth' });
+        }
+    });
+    
+    document.getElementById('next-page')?.addEventListener('click', () => {
+        const totalPages = Math.ceil(getFilteredTools().length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTools();
+            window.scrollTo({ top: toolsContainer.offsetTop - 100, behavior: 'smooth' });
+        }
+    });
+}
+
+// Update setupEventListeners to reset page on filters
+function setupEventListeners() {
+    // ... existing code ...
+    
+    // Add reset page on filter changes
+    const resetPage = () => {
+        currentPage = 1;
+        renderTools();
+    };
+    
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.category;
+            resetPage();
+        });
+    });
+    
+    searchBtn.addEventListener('click', () => {
+        currentSearch = searchInput.value.toLowerCase().trim();
+        resetPage();
+    });
+    
+    sortSelect.addEventListener('change', function() {
+        currentSort = this.value;
+        resetPage();
+    });
+    
+    document.querySelectorAll('.tag-filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const tag = this.dataset.tag;
+            if (activeTags.has(tag)) {
+                activeTags.delete(tag);
+                this.classList.remove('active');
+            } else {
+                activeTags.add(tag);
+                this.classList.add('active');
+            }
+            resetPage();
+        });
+    });
+    
+    document.getElementById('clear-tags')?.addEventListener('click', function() {
+        activeTags.clear();
+        document.querySelectorAll('.tag-filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        resetPage();
+    });
+}
+
+// Update loadToolsFromJSON to include initial pagination
+async function loadToolsFromJSON() {
+    try {
+        const response = await fetch('data/apps.json');
+        const data = await response.json();
+        tools = data.tools;
+        console.log(`Loaded ${tools.length} tools from JSON`);
+        renderTools();
+        updateStats();
+        showRecentTools();
+    } catch (error) {
+        console.error('Failed to load tools from JSON:', error);
+        console.log('Using fallback tools');
+        tools = defaultTools;
+        renderTools();
+        updateStats();
+        showRecentTools();
+    }
+}
 // Tool data - can be moved to separate JSON file
 const tools = [
     {
