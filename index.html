@@ -3,576 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Directory of decentralized apps, privacy tools, and de-Googled alternatives">
-    <title>Decentralized & Privacy Tools Directory</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/color/96/000000/privacy.png">
+    <title>Unbiased News</title>
+    <style>
+        /* Old Reddit-inspired styling */
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #222222;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #cee3f8;
+            border-bottom: 1px solid #5f99cf;
+            padding: 10px 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 18px;
+            color: #ff4500;
+        }
+        
+        .nav-links a {
+            margin-left: 15px;
+            color: #369;
+            text-decoration: none;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .content {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .news-feed {
+            flex: 3;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .sidebar {
+            flex: 1;
+            margin-left: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 10px;
+        }
+        
+        .news-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .news-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .news-title {
+            font-weight: bold;
+            color: #369;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .news-title:hover {
+            text-decoration: underline;
+        }
+        
+        .news-meta {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .news-source {
+            color: #ff4500;
+        }
+        
+        .last-updated {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .error {
+            color: #ff4500;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .sidebar-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #369;
+        }
+        
+        .source-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .source-list li {
+            margin-bottom: 5px;
+        }
+        
+        .filter-controls {
+            margin-bottom: 15px;
+        }
+        
+        .filter-controls select {
+            width: 100%;
+            padding: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                margin-left: 0;
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">UNBIASED NEWS</div>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Sources</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
     <div class="container">
-        <header>
-            <div class="header-top">
-                <h1 class="logo">
-                    <span class="logo-icon">🌐</span>
-                    DECENTRALIZED DIRECTORY
-                </h1>
-                <div class="header-links">
-                    <a href="#browse" class="header-link">Browse</a>
-                    <a href="#submit" class="header-link">Submit</a>
-                    <a href="#about" class="header-link">About</a>
-                </div>
-            </div>
-            <p class="tagline">A curated list of decentralized apps, open-source privacy tools, and de-Googled alternatives</p>
-        </header>
-
-        <div class="main-content">
-            <div class="left-sidebar">
-                <div class="sidebar-section">
-                    <h3>Categories</h3>
-                    <ul class="category-list">
-                        <li><button class="category-btn active" data-category="all">All Tools</button></li>
-                        <li><button class="category-btn" data-category="messaging">Messaging</button></li>
-                        <li><button class="category-btn" data-category="browser">Browsers</button></li>
-                        <li><button class="category-btn" data-category="search">Search Engines</button></li>
-                        <li><button class="category-btn" data-category="storage">Cloud Storage</button></li>
-                        <li><button class="category-btn" data-category="os">Operating Systems</button></li>
-                        <li><button class="category-btn" data-category="social">Social Media</button></li>
-                        <li><button class="category-btn" data-category="productivity">Productivity</button></li>
-                        <li><button class="category-btn" data-category="vpn">VPNs</button></li>
-                        <li><button class="category-btn" data-category="email">Email</button></li>
-                    </ul>
-                </div>
-                
-                <div class="sidebar-section">
-                    <h3>Filter by Features</h3>
-                    <div class="tag-filters" id="tag-filters">
-                        <button class="tag-filter-btn" data-tag="self-hosted">Self-Hosted</button>
-                        <button class="tag-filter-btn" data-tag="encrypted">Encrypted</button>
-                        <button class="tag-filter-btn" data-tag="p2p">P2P</button>
-                        <button class="tag-filter-btn" data-tag="open-source">Open Source</button>
-                        <button class="tag-filter-btn" data-tag="anonymous">Anonymous</button>
-                        <button class="tag-filter-btn" data-tag="mobile">Mobile</button>
-                        <button class="tag-filter-btn" data-tag="desktop">Desktop</button>
-                        <button class="tag-filter-btn" data-tag="free-tier">Free Tier</button>
-                    </div>
-                    <button id="clear-tags" style="margin-top: 10px; font-size: 12px;">Clear Filters</button>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Quick Stats</h3>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-number" id="total-tools">--</span>
-                            <span class="stat-label">Total Tools</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="open-source-count">--</span>
-                            <span class="stat-label">Open Source</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number" id="decentralized-count">--</span>
-                            <span class="stat-label">Decentralized</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-area">
-                <div class="content-header">
-                    <div class="search-box">
-                        <input type="text" id="search-input" placeholder="Search tools...">
-                        <button id="search-btn">Search</button>
-                    </div>
-                    <div class="sort-controls">
-                        <label for="sort-select">Sort by:</label>
-                        <select id="sort-select">
-                            <option value="name">Name (A-Z)</option>
-                            <option value="name-desc">Name (Z-A)</option>
-                            <option value="category">Category</option>
-                            <option value="privacy">Privacy Level</option>
-                            <option value="newest">Newest First</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="tools-list" id="tools-container">
-                    <div class="loading">Loading tools...</div>
-                </div>
-
-                <div class="info-section">
-                    <h3 id="about">About This Directory</h3>
-                    <p>This is a community-curated directory of tools that respect your privacy, promote decentralization, and offer alternatives to Google and other surveillance-capitalism services.</p>
-                    
-                    <div class="principles">
-                        <div class="principle">
-                            <h4>Decentralized</h4>
-                            <p>No single point of control or failure</p>
-                        </div>
-                        <div class="principle">
-                            <h4>Open Source</h4>
-                            <p>Transparent code that can be audited</p>
-                        </div>
-                        <div class="principle">
-                            <h4>Privacy-First</h4>
-                            <p>Designed to protect user data</p>
-                        </div>
-                        <div class="principle">
-                            <h4>De-Googled</h4>
-                            <p>Alternatives to Google services</p>
-                        </div>
-                    </div>
-
-                    <div class="submit-section" id="submit">
-                        <h3>Submit a Tool</h3>
-                        <p>Know a tool that should be listed? <a href="https://github.com/yourusername/decentralized-directory/issues/new" target="_blank">Submit it on GitHub</a> or <a href="mailto:youremail@example.com">email us</a>.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="right-sidebar">
-                <div class="sidebar-section">
-                    <h3>Recently Added</h3>
-                    <div id="recent-tools">
-                        <div class="loading">Loading...</div>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Privacy Tips</h3>
-                    <ul class="tips-list">
-                        <li>Use different passwords for different services</li>
-                        <li>Enable two-factor authentication</li>
-                        <li>Regularly update your software</li>
-                        <li>Use a VPN on public Wi-Fi</li>
-                        <li>Review app permissions regularly</li>
-                    </ul>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Top Alternatives</h3>
-                    <div class="alternative">
-                        <strong>Instead of Gmail:</strong>
-                        <p>ProtonMail, Tutanota</p>
-                    </div>
-                    <div class="alternative">
-                        <strong>Instead of Chrome:</strong>
-                        <p>Firefox, Brave</p>
-                    </div>
-                    <div class="alternative">
-                        <strong>Instead of Google Search:</strong>
-                        <p>DuckDuckGo, Startpage</p>
-                    </div>
-                    <div class="alternative">
-                        <strong>Instead of WhatsApp:</strong>
-                        <p>Signal, Element</p>
-                    </div>
-                </div>
-
-                <div class="sidebar-section">
-                    <h3>Resources</h3>
-                    <ul class="resources-list">
-                        <li><a href="https://privacyguides.org/" target="_blank">Privacy Guides</a></li>
-                        <li><a href="https://www.privacytools.io/" target="_blank">PrivacyTools.io</a></li>
-                        <li><a href="https://degoogle.jmoore.dev/" target="_blank">De-Google Guide</a></li>
-                        <li><a href="https://www.eff.org/" target="_blank">Electronic Frontier Foundation</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Decentralized Directory</h4>
-                    <p>A community resource for privacy and freedom.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>License</h4>
-                    <p>This site is open source. Data available under CC BY-SA 4.0.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Hosting</h4>
-                    <p>Hosted on GitHub Pages. No tracking, no cookies.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>Last updated: <span id="current-date"></span> | <a href="https://github.com/yourusername/decentralized-directory" target="_blank">View on GitHub</a></p>
-            </div>
-        </footer>
-    </div>
-
-    <script src="script.js"></script>
-
-    <!-- Password Generator Modal -->
-<div class="modal-overlay" id="password-modal" style="display: none;">
-    <div class="modal-content" style="max-width: 500px;">
-        <div class="modal-header">
-            <h3>🔐 Secure Password Generator</h3>
-            <button class="close-modal" onclick="closePasswordModal()">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="password-display">
-                <input type="text" id="generated-password" readonly>
-                <div class="password-strength" id="password-strength">
-                    <div class="strength-bar"></div>
-                    <span class="strength-text">Strength: --</span>
-                </div>
-            </div>
-            
-            <div class="generator-controls">
-                <div class="control-group">
-                    <label for="password-length">Length: <span id="length-value">16</span></label>
-                    <input type="range" id="password-length" min="8" max="64" value="16">
-                </div>
-                
-                <div class="control-group">
-                    <label><input type="checkbox" id="uppercase" checked> Uppercase (A-Z)</label>
-                    <label><input type="checkbox" id="lowercase" checked> Lowercase (a-z)</label>
-                    <label><input type="checkbox" id="numbers" checked> Numbers (0-9)</label>
-                    <label><input type="checkbox" id="symbols" checked> Symbols (!@#$%)</label>
-                </div>
-                
-                <div class="control-group">
-                    <label><input type="checkbox" id="avoid-ambiguous"> Avoid ambiguous characters (l,1,I,0,O)</label>
-                    <label><input type="checkbox" id="avoid-similar"> Avoid similar characters (i,l,1,|)</label>
-                </div>
-                
-                <div class="control-group">
-                    <label for="passphrase">Generate passphrase instead:</label>
-                    <select id="passphrase-option">
-                        <option value="no">No</option>
-                        <option value="yes">Yes (3 words)</option>
-                        <option value="yes4">Yes (4 words)</option>
-                        <option value="yes5">Yes (5 words)</option>
+        <div class="content">
+            <div class="news-feed">
+                <div class="filter-controls">
+                    <select id="source-filter">
+                        <option value="all">All Sources</option>
+                        <option value="AP">Associated Press</option>
+                        <option value="Reuters">Reuters</option>
+                        <option value="BBC">BBC</option>
+                        <option value="NPR">NPR</option>
                     </select>
                 </div>
                 
-                <div class="button-group">
-                    <button class="btn-generate" onclick="generatePassword()">Generate Password</button>
-                    <button class="btn-copy" onclick="copyPassword()" id="copy-btn">Copy Password</button>
+                <div id="news-container">
+                    <div class="loading">Loading latest news...</div>
+                </div>
+                
+                <div class="last-updated" id="last-updated">
+                    Last updated: <span id="update-time">Never</span>
                 </div>
             </div>
             
-            <div class="password-tips">
-                <h4>🔒 Password Security Tips:</h4>
-                <ul>
-                    <li>Use a different password for each service</li>
-                    <li>Store passwords in a password manager (like Bitwarden)</li>
-                    <li>Enable two-factor authentication when available</li>
-                    <li>Never share passwords via email or chat</li>
+            <div class="sidebar">
+                <div class="sidebar-title">About</div>
+                <p>This site aggregates news from sources known for their factual reporting and minimal bias.</p>
+                
+                <div class="sidebar-title">Sources</div>
+                <ul class="source-list">
+                    <li>Associated Press</li>
+                    <li>Reuters</li>
+                    <li>BBC News</li>
+                    <li>NPR</li>
                 </ul>
+                
+                <div class="sidebar-title">How It Works</div>
+                <p>Our system automatically collects and updates news every hour from trusted sources.</p>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Add this to your header or somewhere visible -->
-<div class="password-generator-btn" onclick="openPasswordModal()">
-    🔐 Generate Secure Password
-</div>
+    <script>
+        // Sample news data - in a real implementation, this would come from a server
+        const sampleNews = [
+            {
+                title: "Global Summit Addresses Climate Change Concerns",
+                url: "#",
+                source: "AP",
+                timestamp: "1 hour ago",
+                summary: "World leaders gather to discuss new climate initiatives and carbon reduction targets."
+            },
+            {
+                title: "Economy Shows Signs of Recovery in Latest Report",
+                url: "#",
+                source: "Reuters",
+                timestamp: "2 hours ago",
+                summary: "New economic indicators suggest gradual improvement in key sectors."
+            },
+            {
+                title: "Breakthrough in Medical Research Announced",
+                url: "#",
+                source: "BBC",
+                timestamp: "3 hours ago",
+                summary: "Scientists report significant progress in treatment development for rare disease."
+            },
+            {
+                title: "Local Communities Implement Innovative Recycling Programs",
+                url: "#",
+                source: "NPR",
+                timestamp: "4 hours ago",
+                summary: "Municipalities across the country are adopting new approaches to waste management."
+            },
+            {
+                title: "Technology Conference Highlights Emerging Trends",
+                url: "#",
+                source: "AP",
+                timestamp: "5 hours ago",
+                summary: "Industry experts gather to discuss the future of artificial intelligence and automation."
+            }
+        ];
 
-<!-- Add this to your existing script section -->
-<script>
-// Password Generator Functions
-const charSets = {
-    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    lowercase: 'abcdefghijklmnopqrstuvwxyz',
-    numbers: '0123456789',
-    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
-};
-
-// Word list for passphrases (common words)
-const wordList = [
-    'correct', 'horse', 'battery', 'staple', 'cloud', 'forest', 'river', 'mountain',
-    'ocean', 'valley', 'sunset', 'morning', 'evening', 'whisper', 'silence', 'echo',
-    'shadow', 'light', 'spark', 'flame', 'water', 'earth', 'wind', 'fire',
-    'secret', 'hidden', 'secure', 'private', 'strong', 'unique', 'random', 'crypto',
-    'privacy', 'freedom', 'secure', 'digital', 'analog', 'quantum', 'binary', 'logic'
-];
-
-function openPasswordModal() {
-    document.getElementById('password-modal').style.display = 'flex';
-    generatePassword(); // Generate a password when opening
-}
-
-function closePasswordModal() {
-    document.getElementById('password-modal').style.display = 'none';
-    // Clear the password from memory
-    document.getElementById('generated-password').value = '';
-}
-
-function generatePassword() {
-    const length = parseInt(document.getElementById('password-length').value);
-    const useUppercase = document.getElementById('uppercase').checked;
-    const useLowercase = document.getElementById('lowercase').checked;
-    const useNumbers = document.getElementById('numbers').checked;
-    const useSymbols = document.getElementById('symbols').checked;
-    const avoidAmbiguous = document.getElementById('avoid-ambiguous').checked;
-    const avoidSimilar = document.getElementById('avoid-similar').checked;
-    const passphraseOption = document.getElementById('passphrase-option').value;
-    
-    let password = '';
-    
-    if (passphraseOption !== 'no') {
-        // Generate passphrase
-        const wordCount = passphraseOption === 'yes' ? 3 : 
-                         passphraseOption === 'yes4' ? 4 : 5;
-        password = generatePassphrase(wordCount);
-    } else {
-        // Generate traditional password
-        password = generateTraditionalPassword(
-            length, useUppercase, useLowercase, 
-            useNumbers, useSymbols, avoidAmbiguous, avoidSimilar
-        );
-    }
-    
-    document.getElementById('generated-password').value = password;
-    updatePasswordStrength(password);
-}
-
-function generateTraditionalPassword(length, uppercase, lowercase, numbers, symbols, avoidAmbiguous, avoidSimilar) {
-    // Build character pool based on selections
-    let charPool = '';
-    
-    if (uppercase) {
-        let upperChars = charSets.uppercase;
-        if (avoidAmbiguous) upperChars = removeAmbiguous(upperChars);
-        if (avoidSimilar) upperChars = removeSimilar(upperChars, 'uppercase');
-        charPool += upperChars;
-    }
-    
-    if (lowercase) {
-        let lowerChars = charSets.lowercase;
-        if (avoidAmbiguous) lowerChars = removeAmbiguous(lowerChars);
-        if (avoidSimilar) lowerChars = removeSimilar(lowerChars, 'lowercase');
-        charPool += lowerChars;
-    }
-    
-    if (numbers) {
-        let numChars = charSets.numbers;
-        if (avoidAmbiguous) numChars = removeAmbiguous(numChars);
-        if (avoidSimilar) numChars = removeSimilar(numChars, 'numbers');
-        charPool += numChars;
-    }
-    
-    if (symbols) {
-        let symChars = charSets.symbols;
-        if (avoidAmbiguous) symChars = removeAmbiguous(symChars);
-        if (avoidSimilar) symChars = removeSimilar(symChars, 'symbols');
-        charPool += symChars;
-    }
-    
-    // If no character types selected, use all
-    if (!charPool) {
-        charPool = charSets.uppercase + charSets.lowercase + charSets.numbers + charSets.symbols;
-    }
-    
-    // Generate password using cryptographically secure random if available
-    let password = '';
-    try {
-        // Try using crypto API for better randomness
-        const cryptoArray = new Uint32Array(length);
-        window.crypto.getRandomValues(cryptoArray);
-        
-        for (let i = 0; i < length; i++) {
-            password += charPool[cryptoArray[i] % charPool.length];
-        }
-    } catch (e) {
-        // Fallback to Math.random if crypto API not available
-        for (let i = 0; i < length; i++) {
-            const randomIndex = Math.floor(Math.random() * charPool.length);
-            password += charPool[randomIndex];
-        }
-    }
-    
-    return password;
-}
-
-function generatePassphrase(wordCount) {
-    let passphrase = '';
-    try {
-        // Use crypto API for better randomness
-        const cryptoArray = new Uint32Array(wordCount);
-        window.crypto.getRandomValues(cryptoArray);
-        
-        for (let i = 0; i < wordCount; i++) {
-            if (i > 0) passphrase += '-';
-            const randomIndex = cryptoArray[i] % wordList.length;
-            passphrase += wordList[randomIndex];
-        }
-    } catch (e) {
-        // Fallback
-        for (let i = 0; i < wordCount; i++) {
-            if (i > 0) passphrase += '-';
-            const randomIndex = Math.floor(Math.random() * wordList.length);
-            passphrase += wordList[randomIndex];
-        }
-    }
-    
-    // Add a random number at the end for extra security
-    const randomNum = Math.floor(Math.random() * 100);
-    passphrase += randomNum;
-    
-    return passphrase;
-}
-
-function removeAmbiguous(chars) {
-    // Remove ambiguous characters: l,1,I,0,O
-    return chars.replace(/[l1I0O]/g, '');
-}
-
-function removeSimilar(chars, type) {
-    // Remove visually similar characters
-    let similarChars = '';
-    switch(type) {
-        case 'uppercase':
-            similarChars = 'I1l|';
-            break;
-        case 'lowercase':
-            similarChars = 'il1|';
-            break;
-        case 'numbers':
-            similarChars = '01lI|';
-            break;
-        case 'symbols':
-            similarChars = '|';
-            break;
-    }
-    
-    let result = chars;
-    for (let char of similarChars) {
-        result = result.replace(new RegExp(`[${char}]`, 'g'), '');
-    }
-    return result;
-}
-
-function updatePasswordStrength(password) {
-    const strengthBar = document.querySelector('.strength-bar');
-    const strengthText = document.querySelector('.strength-text');
-    
-    let score = 0;
-    
-    // Length check
-    if (password.length >= 12) score += 25;
-    else if (password.length >= 8) score += 15;
-    else score += 5;
-    
-    // Character variety checks
-    if (/[A-Z]/.test(password)) score += 15;
-    if (/[a-z]/.test(password)) score += 15;
-    if (/[0-9]/.test(password)) score += 15;
-    if (/[^A-Za-z0-9]/.test(password)) score += 15;
-    
-    // Entropy bonus
-    const uniqueChars = new Set(password).size;
-    if (uniqueChars / password.length > 0.7) score += 15;
-    
-    // Cap at 100
-    score = Math.min(score, 100);
-    
-    // Update display
-    strengthBar.style.width = `${score}%`;
-    
-    // Set color and text based on score
-    let strength = '';
-    let color = '';
-    
-    if (score < 40) {
-        strength = 'Weak';
-        color = '#d73a49';
-    } else if (score < 70) {
-        strength = 'Fair';
-        color = '#f66a0a';
-    } else if (score < 90) {
-        strength = 'Good';
-        color = '#ffd33d';
-    } else {
-        strength = 'Strong';
-        color = '#28a745';
-    }
-    
-    strengthBar.style.backgroundColor = color;
-    strengthText.textContent = `Strength: ${strength} (${score}/100)`;
-    strengthText.style.color = color;
-}
-
-function copyPassword() {
-    const passwordField = document.getElementById('generated-password');
-    const copyBtn = document.getElementById('copy-btn');
-    
-    // Select the text
-    passwordField.select();
-    passwordField.setSelectionRange(0, 99999); // For mobile devices
-    
-    try {
-        // Try using the modern Clipboard API
-        navigator.clipboard.writeText(passwordField.value).then(() => {
-            // Success feedback
-            const originalText = copyBtn.textContent;
-            copyBtn.textContent = '✓ Copied!';
-            copyBtn.style.backgroundColor = '#28a745';
+        // Function to display news items
+        function displayNews(newsItems, filter = "all") {
+            const container = document.getElementById('news-container');
             
-            setTimeout(() => {
-                copyBtn.textContent = originalText;
-                copyBtn.style.backgroundColor = '';
-            }, 2000);
-        }).catch(err => {
-            // Fallback to execCommand
-            fallbackCopy();
-        });
-    } catch (err) {
-        fallbackCopy();
-    }
-    
-    function fallbackCopy() {
-        document.execCommand('copy');
-        // Success feedback
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = 'Copied!';
-        copyBtn.style.backgroundColor = '#28a745';
-        
-        setTimeout(() => {
-            copyBtn.textContent = originalText;
-            copyBtn.style.backgroundColor = '';
-        }, 2000);
-    }
-}
+            // Filter news if needed
+            const filteredNews = filter === "all" 
+                ? newsItems 
+                : newsItems.filter(item => item.source === filter);
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            if (filteredNews.length === 0) {
+                container.innerHTML = '<div class="error">No news found for the selected source.</div>';
+                return;
+            }
+            
+            // Add news items
+            filteredNews.forEach(item => {
+                const newsElement = document.createElement('div');
+                newsElement.className = 'news-item';
+                newsElement.innerHTML = `
+                    <a href="${item.url}" class="news-title">${item.title}</a>
+                    <div class="news-meta">
+                        <span class="news-source">${item.source}</span> • ${item.timestamp}
+                    </div>
+                    <div>${item.summary}</div>
+                `;
+                container.appendChild(newsElement);
+            });
+        }
 
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Update length display when slider changes
-    const lengthSlider = document.getElementById('password-length');
-    const lengthValue = document.getElementById('length-value');
-    
-    lengthSlider.addEventListener('input', function() {
-        lengthValue.textContent = this.value;
-    });
-    
-    // Close modal when clicking outside
-    document.getElementById('password-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closePasswordModal();
+        // Function to update the last updated time
+        function updateTimestamp() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            document.getElementById('update-time').textContent = timeString;
         }
-    });
-    
-    // Generate on Enter key in modal
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && document.getElementById('password-modal').style.display === 'flex') {
-            generatePassword();
-        }
-        if (e.key === 'Escape') {
-            closePasswordModal();
-        }
-    });
-    
-    // Auto-generate when any setting changes
-    const settings = ['uppercase', 'lowercase', 'numbers', 'symbols', 
-                      'avoid-ambiguous', 'avoid-similar', 'passphrase-option'];
-    settings.forEach(id => {
-        document.getElementById(id).addEventListener('change', generatePassword);
-    });
-});
-</script>
-    
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display initial news
+            displayNews(sampleNews);
+            updateTimestamp();
+            
+            // Set up filter
+            document.getElementById('source-filter').addEventListener('change', function() {
+                displayNews(sampleNews, this.value);
+            });
+            
+            // Simulate hourly updates (in a real implementation, this would fetch from server)
+            setInterval(function() {
+                updateTimestamp();
+                // In a real implementation, we would fetch new data here
+                console.log("Checking for new news...");
+            }, 60 * 60 * 1000); // Every hour
+        });
+    </script>
 </body>
 </html>
