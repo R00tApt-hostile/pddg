@@ -1,7 +1,225 @@
-// 1. Create data/apps.json
 {
   "tools": [
-    // All existing tools plus new ones
+    {
+      "id": 1,
+      "name": "Signal",
+      "url": "https://signal.org",
+      "description": "Private messaging app with end-to-end encryption. Open source and nonprofit.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "nonprofit", "mobile", "desktop"]
+    },
+    {
+      "id": 2,
+      "name": "Element",
+      "url": "https://element.io",
+      "description": "Secure collaboration and messaging app powered by Matrix protocol.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "self-hosted", "matrix", "team-chat"]
+    },
+    {
+      "id": 3,
+      "name": "Mozilla Firefox",
+      "url": "https://www.mozilla.org/firefox/",
+      "description": "Privacy-focused web browser from Mozilla. Open source with strong tracking protection.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["tracking-protection", "extensions", "cross-platform"]
+    },
+    {
+      "id": 4,
+      "name": "Brave Browser",
+      "url": "https://brave.com",
+      "description": "Privacy browser that blocks ads and trackers by default. Built on Chromium.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["ad-blocker", "chromium", "crypto", "rewards"]
+    },
+    {
+      "id": 5,
+      "name": "DuckDuckGo",
+      "url": "https://duckduckgo.com",
+      "description": "Privacy-focused search engine that doesn't track your searches.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["search", "no-tracking", "browser-extension"]
+    },
+    {
+      "id": 6,
+      "name": "Startpage",
+      "url": "https://www.startpage.com",
+      "description": "Private search engine that shows Google results without tracking.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["search", "google-results", "anonymous"]
+    },
+    {
+      "id": 7,
+      "name": "ProtonMail",
+      "url": "https://protonmail.com",
+      "description": "Secure email service with end-to-end encryption based in Switzerland.",
+      "category": "email",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "swiss", "calendar", "drive"]
+    },
+    {
+      "id": 8,
+      "name": "Tutanota",
+      "url": "https://tutanota.com",
+      "description": "Encrypted email service that's open source and ad-free.",
+      "category": "email",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "germany", "calendar", "open-source"]
+    },
+    {
+      "id": 9,
+      "name": "Nextcloud",
+      "url": "https://nextcloud.com",
+      "description": "Self-hosted productivity platform with file sync, calendar, contacts, and more.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["self-hosted", "files", "calendar", "collaboration"]
+    },
+    {
+      "id": 10,
+      "name": "Syncthing",
+      "url": "https://syncthing.net",
+      "description": "Continuous file synchronization between devices. P2P and encrypted.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["p2p", "sync", "encrypted", "self-hosted"]
+    },
+    {
+      "id": 11,
+      "name": "Mullvad VPN",
+      "url": "https://mullvad.net",
+      "description": "VPN service focused on privacy with anonymous accounts and wireguard.",
+      "category": "vpn",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "wireguard", "no-logs", "anonymous"]
+    },
+    {
+      "id": 12,
+      "name": "IVPN",
+      "url": "https://ivpn.net",
+      "description": "Privacy-first VPN service with strong no-logs policy and transparent audits.",
+      "category": "vpn",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "audited", "no-logs", "multi-hop"]
+    },
+    {
+      "id": 13,
+      "name": "Mastodon",
+      "url": "https://joinmastodon.org",
+      "description": "Decentralized social network running on the Fediverse. Twitter alternative.",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "microblogging", "decentralized", "communities"]
+    },
+    {
+      "id": 14,
+      "name": "Lemmy",
+      "url": "https://join-lemmy.org",
+      "description": "Decentralized link aggregator and forum (Reddit alternative).",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "forums", "reddit-alternative", "self-hosted"]
+    },
+    {
+      "id": 15,
+      "name": "/e/ OS",
+      "url": "https://e.foundation",
+      "description": "Privacy-focused mobile OS based on Android, de-Googled with microG.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["android", "degoogled", "mobile", "privacy"]
+    },
+    {
+      "id": 16,
+      "name": "GrapheneOS",
+      "url": "https://grapheneos.org",
+      "description": "Privacy and security focused mobile OS with Android compatibility.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["android", "security", "hardened", "pixel-only"]
+    },
+    {
+      "id": 17,
+      "name": "Standard Notes",
+      "url": "https://standardnotes.com",
+      "description": "End-to-end encrypted note-taking app with extensions and markdown.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["notes", "encrypted", "markdown", "cross-platform"]
+    },
+    {
+      "id": 18,
+      "name": "Joplin",
+      "url": "https://joplinapp.org",
+      "description": "Open source note-taking app with end-to-end encryption and sync.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["notes", "markdown", "sync", "self-hosted"]
+    },
+    {
+      "id": 19,
+      "name": "Bitwarden",
+      "url": "https://bitwarden.com",
+      "description": "Open source password manager with end-to-end encryption and self-hosting.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["passwords", "encrypted", "2fa", "self-hosted"]
+    },
+    {
+      "id": 20,
+      "name": "KeepassXC",
+      "url": "https://keepassxc.org",
+      "description": "Offline, open source password manager. Stores passwords locally.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["passwords", "offline", "local", "cross-platform"]
+    },
     {
       "id": 21,
       "name": "Tor Browser",
@@ -11,23 +229,51 @@
       "openSource": true,
       "decentralized": true,
       "privacyLevel": "high",
-      "platforms": ["Windows", "macOS", "Linux", "Android"],
-      "difficulty": "intermediate"
+      "tags": ["anonymous", "tor", "onion", "censorship-circumvention"]
+    },
+    {
+      "id": 22,
+      "name": "LibreWolf",
+      "url": "https://librewolf.net",
+      "description": "Privacy-focused Firefox fork with enhanced tracking protection.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["firefox-fork", "hardened", "privacy", "tracking-protection"]
+    },
+    {
+      "id": 23,
+      "name": "Searx",
+      "url": "https://searx.github.io/searx",
+      "description": "Privacy-respecting metasearch engine that can be self-hosted.",
+      "category": "search",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["metasearch", "self-hosted", "aggregator", "open-source"]
+    },
+    {
+      "id": 24,
+      "name": "Proton VPN",
+      "url": "https://protonvpn.com",
+      "description": "Secure VPN service from Proton with free tier and strong encryption.",
+      "category": "vpn",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "swiss", "free-tier", "secure-core"]
+    },
+    {
+      "id": 25,
+      "name": "Delta Chat",
+      "url": "https://delta.chat",
+      "description": "Chat over email using existing email servers. No registration needed.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["email-based", "no-registration", "p2p", "e2ee"]
     }
   ]
-}
-
-// 2. Update script.js to load from JSON
-async function loadToolsData() {
-  try {
-    const response = await fetch('data/apps.json');
-    const data = await response.json();
-    window.tools = data.tools;
-    renderTools();
-    updateStats();
-  } catch (error) {
-    console.error('Error loading tools data:', error);
-    // Fallback to embedded data
-    window.tools = defaultTools;
-  }
 }
