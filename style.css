@@ -1,882 +1,612 @@
-/* Old Reddit-inspired styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #222222;
-    background-color: #f0f0f0;
-    min-height: 100vh;
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 10px;
-}
-
-/* Header */
-header {
-    background-color: #cee3f8;
-    border-bottom: 1px solid #5f99cf;
-    padding: 10px 0;
-    margin-bottom: 15px;
-}
-
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.logo {
-    font-weight: bold;
-    font-size: 22px;
-    color: #ff4500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.logo-icon {
-    font-size: 28px;
-}
-
-.tagline {
-    margin-top: 8px;
-    color: #444;
-    font-size: 13px;
-    font-style: italic;
-}
-
-.header-links {
-    display: flex;
-    gap: 20px;
-}
-
-.header-link {
-    color: #369;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.header-link:hover {
-    text-decoration: underline;
-}
-
-/* Main Layout */
-.main-content {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.left-sidebar, .right-sidebar {
-    flex: 1;
-    min-width: 200px;
-}
-
-.content-area {
-    flex: 3;
-    min-width: 0;
-}
-
-/* Sidebar Sections */
-.sidebar-section {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 15px;
-    padding: 12px;
-}
-
-.sidebar-section h3 {
-    font-size: 15px;
-    color: #369;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
-}
-
-/* Category List */
-.category-list {
-    list-style: none;
-}
-
-.category-btn {
-    width: 100%;
-    text-align: left;
-    padding: 8px 10px;
-    margin-bottom: 5px;
-    background: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 13px;
-    color: #333;
-}
-
-.category-btn:hover {
-    background-color: #e9e9e9;
-}
-
-.category-btn.active {
-    background-color: #cee3f8;
-    border-color: #5f99cf;
-    font-weight: bold;
-}
-
-/* Tag filtering styles */
-.tag-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 10px;
-}
-
-.tag-filter-btn {
-    padding: 4px 8px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    font-size: 11px;
-    cursor: pointer;
-    color: #555;
-    transition: all 0.2s;
-}
-
-.tag-filter-btn:hover {
-    background-color: #e0e0e0;
-}
-
-.tag-filter-btn.active {
-    background-color: #cee3f8;
-    border-color: #5f99cf;
-    color: #333;
-    font-weight: bold;
-}
-
-/* Stats */
-.stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-around;
-}
-
-.stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.stat-number {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff4500;
-}
-
-.stat-label {
-    font-size: 11px;
-    color: #666;
-    margin-top: 3px;
-}
-
-/* Content Header */
-.content-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.search-box {
-    display: flex;
-    gap: 5px;
-}
-
-#search-input {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 250px;
-    font-size: 13px;
-}
-
-#search-btn {
-    padding: 6px 12px;
-    background-color: #5f99cf;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-#search-btn:hover {
-    background-color: #4a8bc7;
-}
-
-.sort-controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-}
-
-#sort-select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 13px;
-}
-
-/* Tools List */
-.tools-list {
-    display: grid;
-    gap: 12px;
-    margin-bottom: 30px;
-}
-
-.tool-item {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    padding: 15px;
-    transition: all 0.2s;
-}
-
-.tool-item:hover {
-    border-color: #999;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-.tool-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 8px;
-}
-
-.tool-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #369;
-    text-decoration: none;
-}
-
-.tool-title:hover {
-    text-decoration: underline;
-}
-
-.tool-category {
-    background-color: #e9e9e9;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-    color: #555;
-}
-
-.tool-description {
-    color: #555;
-    margin-bottom: 10px;
-    line-height: 1.5;
-}
-
-.tool-meta {
-    display: flex;
-    gap: 15px;
-    font-size: 12px;
-    color: #777;
-    margin-bottom: 8px;
-}
-
-.meta-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.meta-icon {
-    font-size: 14px;
-}
-
-.open-source {
-    color: #22863a;
-}
-
-.decentralized {
-    color: #6f42c1;
-}
-
-.privacy-high {
-    color: #d73a49;
-}
-
-.privacy-medium {
-    color: #f66a0a;
-}
-
-.privacy-low {
-    color: #6a737d;
-}
-
-/* Tool tags display */
-.tool-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid #f0f0f0;
-}
-
-.tool-tag {
-    background-color: #f5f5f5;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 11px;
-    color: #666;
-    border: 1px solid #ddd;
-}
-
-.loading {
-    text-align: center;
-    padding: 40px;
-    color: #666;
-    font-style: italic;
-}
-
-.no-results {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.no-results p {
-    margin-bottom: 10px;
-    color: #666;
-}
-
-.no-results p:first-child {
-    font-size: 16px;
-    color: #333;
-}
-
-/* Info Section */
-.info-section {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-.info-section h3 {
-    color: #369;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
-}
-
-.principles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.principle {
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-left: 3px solid #5f99cf;
-}
-
-.principle h4 {
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.principle p {
-    font-size: 13px;
-    color: #666;
-}
-
-.submit-section {
-    margin-top: 25px;
-    padding: 15px;
-    background-color: #f0f7ff;
-    border-radius: 3px;
-}
-
-.submit-section a {
-    color: #369;
-    text-decoration: none;
-}
-
-.submit-section a:hover {
-    text-decoration: underline;
-}
-
-/* Recent Tools */
-.recent-tool {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.recent-tool:last-child {
-    border-bottom: none;
-}
-
-.recent-tool a {
-    font-size: 13px;
-    color: #369;
-    text-decoration: none;
-    display: block;
-}
-
-.recent-tool a:hover {
-    text-decoration: underline;
-}
-
-.recent-tool-category {
-    font-size: 11px;
-    color: #888;
-    margin-top: 2px;
-}
-
-/* Tips, Alternatives, Resources */
-.tips-list, .resources-list {
-    list-style: none;
-    font-size: 13px;
-}
-
-.tips-list li {
-    padding: 5px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.tips-list li:last-child {
-    border-bottom: none;
-}
-
-.alternative {
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.alternative:last-child {
-    border-bottom: none;
-}
-
-.alternative strong, .featured-tool strong {
-    color: #333;
-    font-size: 13px;
-}
-
-.alternative p, .featured-tool p {
-    font-size: 12px;
-    color: #666;
-    margin-top: 3px;
-}
-
-.resources-list li {
-    padding: 5px 0;
-}
-
-.resources-list a {
-    color: #369;
-    text-decoration: none;
-}
-
-.resources-list a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
-footer {
-    background-color: #cee3f8;
-    border-top: 1px solid #5f99cf;
-    padding: 20px 0;
-    margin-top: 30px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 20px;
-}
-
-.footer-section h4 {
-    color: #333;
-    margin-bottom: 10px;
-    font-size: 15px;
-}
-
-.footer-section p {
-    font-size: 13px;
-    color: #555;
-    line-height: 1.5;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 15px;
-    border-top: 1px solid #b0d0ff;
-    font-size: 12px;
-    color: #666;
-}
-
-.footer-bottom a {
-    color: #369;
-    text-decoration: none;
-}
-
-.footer-bottom a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .main-content {
-        flex-direction: column;
-    }
-    
-    .left-sidebar, .right-sidebar {
-        width: 100%;
-        order: 2;
-    }
-    
-    .content-area {
-        order: 1;
-    }
-    
-    .content-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .search-box {
-        width: 100%;
-    }
-    
-    #search-input {
-        flex-grow: 1;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    
-    .header-links {
-        align-self: stretch;
-        justify-content: space-around;
-    }
-    
-    .principles {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .container {
-        padding: 0 5px;
-    }
-    
-    .tool-meta {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-/* Password Generator Button */
-.password-generator-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ff4500;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 3px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-    font-size: 14px;
-    border: none;
-}
-
-.password-generator-btn:hover {
-    background-color: #ff5722;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-/* Modal Overlay */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal-content {
-    background-color: white;
-    border-radius: 3px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    width: 100%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-    border: 1px solid #5f99cf;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #cee3f8;
-    border-bottom: 1px solid #5f99cf;
-    border-radius: 3px 3px 0 0;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: #333;
-    font-size: 16px;
-}
-
-.close-modal {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #666;
-    line-height: 1;
-    padding: 0;
-    width: 24px;
-    height: 24px;
-}
-
-.close-modal:hover {
-    color: #ff4500;
-}
-
-.modal-body {
-    padding: 20px;
-}
-
-/* Password Display */
-.password-display {
-    margin-bottom: 20px;
-}
-
-#generated-password {
-    width: 100%;
-    padding: 12px;
-    font-family: 'Courier New', monospace;
-    font-size: 16px;
-    border: 2px solid #ccc;
-    border-radius: 3px;
-    background-color: #f9f9f9;
-    text-align: center;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-}
-
-#generated-password:focus {
-    outline: none;
-    border-color: #5f99cf;
-}
-
-.password-strength {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.strength-bar {
-    flex-grow: 1;
-    height: 6px;
-    background-color: #ddd;
-    border-radius: 3px;
-    overflow: hidden;
-    transition: all 0.3s;
-}
-
-.strength-bar::after {
-    content: '';
-    display: block;
-    height: 100%;
-    width: 0%;
-    transition: width 0.3s;
-}
-
-.strength-text {
-    font-size: 12px;
-    color: #666;
-    min-width: 120px;
-}
-
-/* Generator Controls */
-.generator-controls {
-    margin-bottom: 20px;
-}
-
-.control-group {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.control-group:last-child {
-    border-bottom: none;
-}
-
-.control-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 13px;
-    color: #333;
-    cursor: pointer;
-}
-
-.control-group input[type="checkbox"] {
-    margin-right: 8px;
-}
-
-.control-group input[type="range"] {
-    width: 100%;
-    margin-top: 5px;
-    cursor: pointer;
-}
-
-.control-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 13px;
-    margin-top: 5px;
-}
-
-/* Button Group */
-.button-group {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn-generate, .btn-copy {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 3px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.btn-generate {
-    background-color: #5f99cf;
-    color: white;
-}
-
-.btn-generate:hover {
-    background-color: #4a8bc7;
-}
-
-.btn-copy {
-    background-color: #6c757d;
-    color: white;
-}
-
-.btn-copy:hover {
-    background-color: #5a6268;
-}
-
-/* Password Tips */
-.password-tips {
-    background-color: #f0f7ff;
-    border-radius: 3px;
-    padding: 15px;
-    margin-top: 20px;
-    border-left: 3px solid #5f99cf;
-}
-
-.password-tips h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 14px;
-}
-
-.password-tips ul {
-    margin: 0;
-    padding-left: 20px;
-    font-size: 13px;
-    color: #555;
-}
-
-.password-tips li {
-    margin-bottom: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .password-generator-btn {
-        bottom: 10px;
-        right: 10px;
-        font-size: 13px;
-        padding: 10px 15px;
-    }
-    
-    .modal-content {
-        max-height: 80vh;
-    }
-    
-    .button-group {
-        flex-direction: column;
-    }
-}
-
-/* For the floating button on mobile */
-@media (max-width: 480px) {
-    .password-generator-btn {
-        width: calc(100% - 20px);
-        left: 10px;
-        right: 10px;
-        text-align: center;
-    }
-}
-}
+{
+  "tools": [
+    {
+      "id": 1,
+      "name": "Signal",
+      "url": "https://signal.org",
+      "description": "Private messaging app with end-to-end encryption. Open source and nonprofit.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "nonprofit", "mobile", "desktop"]
+    },
+    {
+      "id": 2,
+      "name": "Element",
+      "url": "https://element.io",
+      "description": "Secure collaboration and messaging app powered by Matrix protocol.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "self-hosted", "matrix", "team-chat"]
+    },
+    {
+      "id": 3,
+      "name": "Mozilla Firefox",
+      "url": "https://www.mozilla.org/firefox/",
+      "description": "Privacy-focused web browser from Mozilla. Open source with strong tracking protection.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["tracking-protection", "extensions", "cross-platform"]
+    },
+    {
+      "id": 4,
+      "name": "Brave Browser",
+      "url": "https://brave.com",
+      "description": "Privacy browser that blocks ads and trackers by default. Built on Chromium.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["ad-blocker", "chromium", "crypto", "rewards"]
+    },
+    {
+      "id": 5,
+      "name": "DuckDuckGo",
+      "url": "https://duckduckgo.com",
+      "description": "Privacy-focused search engine that doesn't track your searches.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["search", "no-tracking", "browser-extension"]
+    },
+    {
+      "id": 6,
+      "name": "Startpage",
+      "url": "https://www.startpage.com",
+      "description": "Private search engine that shows Google results without tracking.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["search", "google-results", "anonymous"]
+    },
+    {
+      "id": 7,
+      "name": "ProtonMail",
+      "url": "https://protonmail.com",
+      "description": "Secure email service with end-to-end encryption based in Switzerland.",
+      "category": "email",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "swiss", "calendar", "drive"]
+    },
+    {
+      "id": 8,
+      "name": "Tutanota",
+      "url": "https://tutanota.com",
+      "description": "Encrypted email service that's open source and ad-free.",
+      "category": "email",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["encrypted", "germany", "calendar", "open-source"]
+    },
+    {
+      "id": 9,
+      "name": "Nextcloud",
+      "url": "https://nextcloud.com",
+      "description": "Self-hosted productivity platform with file sync, calendar, contacts, and more.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["self-hosted", "files", "calendar", "collaboration"]
+    },
+    {
+      "id": 10,
+      "name": "Syncthing",
+      "url": "https://syncthing.net",
+      "description": "Continuous file synchronization between devices. P2P and encrypted.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["p2p", "sync", "encrypted", "self-hosted"]
+    },
+    {
+      "id": 11,
+      "name": "Mullvad VPN",
+      "url": "https://mullvad.net",
+      "description": "VPN service focused on privacy with anonymous accounts and wireguard.",
+      "category": "vpn",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "wireguard", "no-logs", "anonymous"]
+    },
+    {
+      "id": 12,
+      "name": "IVPN",
+      "url": "https://ivpn.net",
+      "description": "Privacy-first VPN service with strong no-logs policy and transparent audits.",
+      "category": "vpn",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "audited", "no-logs", "multi-hop"]
+    },
+    {
+      "id": 13,
+      "name": "Mastodon",
+      "url": "https://joinmastodon.org",
+      "description": "Decentralized social network running on the Fediverse. Twitter alternative.",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "microblogging", "decentralized", "communities"]
+    },
+    {
+      "id": 14,
+      "name": "Lemmy",
+      "url": "https://join-lemmy.org",
+      "description": "Decentralized link aggregator and forum (Reddit alternative).",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "forums", "reddit-alternative", "self-hosted"]
+    },
+    {
+      "id": 15,
+      "name": "/e/ OS",
+      "url": "https://e.foundation",
+      "description": "Privacy-focused mobile OS based on Android, de-Googled with microG.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["android", "degoogled", "mobile", "privacy"]
+    },
+    {
+      "id": 16,
+      "name": "GrapheneOS",
+      "url": "https://grapheneos.org",
+      "description": "Privacy and security focused mobile OS with Android compatibility.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["android", "security", "hardened", "pixel-only"]
+    },
+    {
+      "id": 17,
+      "name": "Standard Notes",
+      "url": "https://standardnotes.com",
+      "description": "End-to-end encrypted note-taking app with extensions and markdown.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["notes", "encrypted", "markdown", "cross-platform"]
+    },
+    {
+      "id": 18,
+      "name": "Joplin",
+      "url": "https://joplinapp.org",
+      "description": "Open source note-taking app with end-to-end encryption and sync.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["notes", "markdown", "sync", "self-hosted"]
+    },
+    {
+      "id": 19,
+      "name": "Bitwarden",
+      "url": "https://bitwarden.com",
+      "description": "Open source password manager with end-to-end encryption and self-hosting.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["passwords", "encrypted", "2fa", "self-hosted"]
+    },
+    {
+      "id": 20,
+      "name": "KeepassXC",
+      "url": "https://keepassxc.org",
+      "description": "Offline, open source password manager. Stores passwords locally.",
+      "category": "productivity",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["passwords", "offline", "local", "cross-platform"]
+    },
+    {
+      "id": 21,
+      "name": "Tor Browser",
+      "url": "https://www.torproject.org",
+      "description": "Anonymous web browser that routes traffic through the Tor network.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["anonymous", "tor", "onion", "censorship-circumvention"]
+    },
+    {
+      "id": 22,
+      "name": "LibreWolf",
+      "url": "https://librewolf.net",
+      "description": "Privacy-focused Firefox fork with enhanced tracking protection.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["firefox-fork", "hardened", "privacy", "tracking-protection"]
+    },
+    {
+      "id": 23,
+      "name": "Searx",
+      "url": "https://searx.github.io/searx",
+      "description": "Privacy-respecting metasearch engine that can be self-hosted.",
+      "category": "search",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["metasearch", "self-hosted", "aggregator", "open-source"]
+    },
+    {
+      "id": 24,
+      "name": "Proton VPN",
+      "url": "https://protonvpn.com",
+      "description": "Secure VPN service from Proton with free tier and strong encryption.",
+      "category": "vpn",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "swiss", "free-tier", "secure-core"]
+    },
+    {
+      "id": 25,
+      "name": "Delta Chat",
+      "url": "https://delta.chat",
+      "description": "Chat over email using existing email servers. No registration needed.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["email-based", "no-registration", "p2p", "e2ee"]
+    },
+    {
+      "id": 26,
+      "name": "Session",
+      "url": "https://getsession.org",
+      "description": "Private messenger that doesn't require phone number or email.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["anonymous", "metadata-protection", "mobile", "desktop"]
+    },
+    {
+      "id": 27,
+      "name": "Briar",
+      "url": "https://briarproject.org",
+      "description": "Peer-to-peer encrypted messaging and blogging platform.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["p2p", "offline-messaging", "android", "encrypted"]
+    },
+    {
+      "id": 28,
+      "name": "Threema",
+      "url": "https://threema.ch",
+      "description": "Swiss messenger with strong focus on privacy and security.",
+      "category": "messaging",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["swiss", "encrypted", "paid", "no-phone"]
+    },
+    {
+      "id": 29,
+      "name": "Jami",
+      "url": "https://jami.net",
+      "description": "Free and universal communication platform that respects freedoms and privacy.",
+      "category": "messaging",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["p2p", "gnu", "video-call", "encrypted"]
+    },
+    {
+      "id": 30,
+      "name": "Ungoogled Chromium",
+      "url": "https://ungoogled-software.github.io",
+      "description": "Chromium without Google integration and privacy-invasive features.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["chromium", "degoogled", "privacy", "extensions"]
+    },
+    {
+      "id": 31,
+      "name": "Iridium Browser",
+      "url": "https://iridiumbrowser.de",
+      "description": "Chromium-based browser with privacy and security enhancements.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["chromium", "security", "privacy", "degoogled"]
+    },
+    {
+      "id": 32,
+      "name": "Waterfox",
+      "url": "https://www.waterfox.net",
+      "description": "Firefox fork focused on speed, privacy, and user choice.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "medium",
+      "tags": ["firefox-fork", "privacy", "legacy-support", "customizable"]
+    },
+    {
+      "id": 33,
+      "name": "Pale Moon",
+      "url": "https://www.palemoon.org",
+      "description": "Open source web browser with custom layout engine.",
+      "category": "browser",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "medium",
+      "tags": ["custom-engine", "firefox-fork", "lightweight", "extensions"]
+    },
+    {
+      "id": 34,
+      "name": "Qwant",
+      "url": "https://www.qwant.com",
+      "description": "Privacy-respecting search engine based in France.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["search", "french", "no-tracking", "maps"]
+    },
+    {
+      "id": 35,
+      "name": "Ecosia",
+      "url": "https://www.ecosia.org",
+      "description": "Search engine that uses profits to plant trees.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "medium",
+      "tags": ["search", "eco-friendly", "tree-planting", "privacy"]
+    },
+    {
+      "id": 36,
+      "name": "Swisscows",
+      "url": "https://swisscows.com",
+      "description": "Privacy-protecting search engine from Switzerland.",
+      "category": "search",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["search", "swiss", "family-friendly", "no-tracking"]
+    },
+    {
+      "id": 37,
+      "name": "Mailbox.org",
+      "url": "https://mailbox.org",
+      "description": "Privacy-focused email and office suite from Germany.",
+      "category": "email",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["email", "germany", "office-suite", "encrypted"]
+    },
+    {
+      "id": 38,
+      "name": "Posteo",
+      "url": "https://posteo.de",
+      "description": "Green email provider with strong privacy features.",
+      "category": "email",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["email", "germany", "eco-friendly", "encrypted"]
+    },
+    {
+      "id": 39,
+      "name": "Mailfence",
+      "url": "https://mailfence.com",
+      "description": "Secure email service with digital signature and encryption.",
+      "category": "email",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["email", "belgium", "encrypted", "digital-signature"]
+    },
+    {
+      "id": 40,
+      "name": "OwnCloud",
+      "url": "https://owncloud.com",
+      "description": "Self-hosted file sync and share platform.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["self-hosted", "files", "sync", "collaboration"]
+    },
+    {
+      "id": 41,
+      "name": "Seafile",
+      "url": "https://www.seafile.com",
+      "description": "High performance file sync and share solution.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["self-hosted", "files", "sync", "performance"]
+    },
+    {
+      "id": 42,
+      "name": "Pydio",
+      "url": "https://pydio.com",
+      "description": "Open source file sharing and synchronization platform.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["self-hosted", "files", "sync", "enterprise"]
+    },
+    {
+      "id": 43,
+      "name": "IPFS",
+      "url": "https://ipfs.io",
+      "description": "Peer-to-peer hypermedia protocol to make the web faster and more open.",
+      "category": "storage",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["p2p", "distributed", "protocol", "content-addressed"]
+    },
+    {
+      "id": 44,
+      "name": "NordVPN",
+      "url": "https://nordvpn.com",
+      "description": "VPN service with strong privacy features and large server network.",
+      "category": "vpn",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "no-logs", "large-network", "features"]
+    },
+    {
+      "id": 45,
+      "name": "ExpressVPN",
+      "url": "https://expressvpn.com",
+      "description": "VPN service known for speed and reliability.",
+      "category": "vpn",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "medium",
+      "tags": ["vpn", "fast", "reliable", "easy"]
+    },
+    {
+      "id": 46,
+      "name": "Surfshark",
+      "url": "https://surfshark.com",
+      "description": "VPN with unlimited device connections and CleanWeb feature.",
+      "category": "vpn",
+      "openSource": false,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["vpn", "unlimited-devices", "ad-blocker", "no-logs"]
+    },
+    {
+      "id": 47,
+      "name": "Pixelfed",
+      "url": "https://pixelfed.org",
+      "description": "Decentralized image sharing platform (Instagram alternative).",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "photos", "instagram-alternative", "decentralized"]
+    },
+    {
+      "id": 48,
+      "name": "PeerTube",
+      "url": "https://joinpeertube.org",
+      "description": "Decentralized video streaming platform using P2P technology.",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "videos", "youtube-alternative", "p2p"]
+    },
+    {
+      "id": 49,
+      "name": "Funkwhale",
+      "url": "https://funkwhale.audio",
+      "description": "Modern, self-hosted, free and open-source music server.",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "music", "spotify-alternative", "self-hosted"]
+    },
+    {
+      "id": 50,
+      "name": "Diaspora",
+      "url": "https://diasporafoundation.org",
+      "description": "Decentralized social network where you own your data.",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["decentralized", "social", "facebook-alternative", "self-hosted"]
+    },
+    {
+      "id": 51,
+      "name": "Friendica",
+      "url": "https://friendi.ca",
+      "description": "Decentralized social network that connects to many other networks.",
+      "category": "social",
+      "openSource": true,
+      "decentralized": true,
+      "privacyLevel": "high",
+      "tags": ["fediverse", "social", "multi-network", "decentralized"]
+    },
+    {
+      "id": 52,
+      "name": "LineageOS",
+      "url": "https://lineageos.org",
+      "description": "Free and open-source operating system for smartphones and tablets.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "medium",
+      "tags": ["android", "custom-rom", "open-source", "privacy"]
+    },
+    {
+      "id": 53,
+      "name": "CalyxOS",
+      "url": "https://calyxos.org",
+      "description": "Android mobile operating system with privacy and security focus.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["android", "privacy", "security", "degoogled"]
+    },
+    {
+      "id": 54,
+      "name": "Ubuntu",
+      "url": "https://ubuntu.com",
+      "description": "Popular Linux distribution with strong privacy features.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["linux", "desktop", "server", "user-friendly"]
+    },
+    {
+      "id": 55,
+      "name": "Debian",
+      "url": "https://debian.org",
+      "description": "Stable and secure Linux distribution maintained by volunteers.",
+      "category": "os",
+      "openSource": true,
+      "decentralized": false,
+      "privacyLevel": "high",
+      "tags": ["linux", "stable", "secure", "community-driven"]
+    },
+    {
+      "id": 56,
+      "name": "Qubes OS",
+      "url": "https://qubes-os.org",
+      "description": "Security-oriented operating syste
